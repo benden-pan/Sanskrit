@@ -6,185 +6,75 @@
 <title>天城體輔音表 — देवनागरी व्यञ्जन वर्णमाला</title>
 <style>
   :root {
-    --bg: #fdf6e3;
-    --panel: #fff8ee;
-    --border: #d4a96a;
-    --accent: #8b3a00;
-    --accent2: #c0392b;
-    --text: #2c1810;
-    --muted: #7a6050;
-    --stroke1: #e74c3c;
-    --stroke2: #2980b9;
-    --stroke3: #27ae60;
-    --stroke4: #8e44ad;
-    --canvas-bg: #f0ede8;
+    --bg: #fdf6e3; --panel: #fff8ee; --border: #d4a96a;
+    --accent: #8b3a00; --accent2: #c0392b; --text: #2c1810; --muted: #7a6050;
+    --stroke1: #e74c3c; --stroke2: #2980b9; --stroke3: #27ae60; --stroke4: #8e44ad;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-  }
-  header {
-    background: linear-gradient(135deg, #6b2500 0%, #a0400a 50%, #6b2500 100%);
-    color: #fff8ee;
-    text-align: center;
-    padding: 2rem 1rem 1.5rem;
-    border-bottom: 4px solid var(--border);
-  }
-  header h1 { font-size: 2rem; letter-spacing: .05em; }
-  header h2 { font-size: 1.1rem; font-weight: 400; opacity: .85; margin-top: .3rem; }
-  header p  { font-size: .9rem; opacity: .7; margin-top: .5rem; }
-
-  .tabs {
-    display: flex; flex-wrap: wrap; gap: .4rem;
-    background: #5a1e00;
-    padding: .6rem 1rem;
-    position: sticky; top: 0; z-index: 100;
-  }
-  .tabs button {
-    background: transparent; border: 1px solid #c87830;
-    color: #ffd8a0; padding: .35rem .85rem; border-radius: 20px;
-    cursor: pointer; font-size: .85rem; transition: all .2s;
-  }
-  .tabs button:hover, .tabs button.active {
-    background: #c87830; color: #fff; border-color: #c87830;
-  }
-
-  .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
-  .section { display: none; }
-  .section.active { display: block; }
-
-  h3.section-title {
-    font-size: 1.3rem; color: var(--accent);
-    border-bottom: 2px solid var(--border);
-    padding-bottom: .4rem; margin: 1.5rem 0 1rem;
-  }
-  .group-label {
-    font-size: .8rem; font-weight: 700; letter-spacing: .12em;
-    color: var(--muted); text-transform: uppercase;
-    margin: 1.2rem 0 .5rem;
-  }
-
-  .varna-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: .7rem;
-  }
-  @media(max-width:600px){ .varna-grid{ grid-template-columns: repeat(3,1fr); } }
-  .varna-card {
-    background: var(--panel);
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    padding: .7rem .5rem .5rem;
-    text-align: center;
-    cursor: pointer;
-    transition: transform .15s, box-shadow .15s;
-    user-select: none;
-  }
-  .varna-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(139,58,0,.18);
-  }
-  .varna-card.selected {
-    border-color: var(--accent2);
-    box-shadow: 0 0 0 2px var(--accent2);
-  }
-  .varna-deva  { font-size: 2.2rem; line-height: 1; color: var(--accent); }
-  .varna-roman { font-size: .8rem;  color: var(--muted); margin-top: .2rem; font-style: italic; }
-  .varna-iast  { font-size: .75rem; color: #a07840; }
-
-  .stroke-panel {
-    background: var(--panel);
-    border: 1.5px solid var(--border);
-    border-radius: 12px;
-    padding: 1.2rem;
-    margin: 1rem 0;
-  }
-  .stroke-panel h4 { font-size: 1rem; color: var(--accent); margin-bottom: .8rem; }
-  .stroke-steps { display: flex; flex-wrap: wrap; gap: .8rem; align-items: flex-start; }
-  .stroke-step { display: flex; flex-direction: column; align-items: center; gap: .3rem; }
-  .stroke-step .step-num { font-size: .7rem; color: var(--muted); font-weight: 700; }
-  .stroke-step svg { border: 1px solid #d4a96a; border-radius: 6px; background: #fff; }
-
-  .practice-area {
-    background: var(--panel);
-    border: 1.5px solid var(--border);
-    border-radius: 12px;
-    padding: 1.2rem;
-    margin: 1rem 0;
-  }
-  .practice-area h4 { font-size: 1rem; color: var(--accent); margin-bottom: .8rem; }
-  .canvas-toolbar { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: .7rem; align-items: center; }
-  .canvas-toolbar label { font-size: .85rem; color: var(--muted); }
-  .canvas-toolbar input[type=range] { width: 90px; }
-  .canvas-toolbar input[type=color] { width: 36px; height: 28px; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; }
-  .btn {
-    background: var(--accent); color: #fff;
-    border: none; border-radius: 6px;
-    padding: .35rem .8rem; cursor: pointer; font-size: .85rem;
-    transition: background .15s;
-  }
-  .btn:hover { background: #6b2500; }
-  .btn.secondary {
-    background: transparent; color: var(--accent);
-    border: 1.5px solid var(--accent);
-  }
-  .btn.secondary:hover { background: var(--accent); color: #fff; }
-  .canvas-wrap {
-    position: relative; display: inline-block;
-    border: 2px solid var(--border); border-radius: 8px;
-    overflow: hidden; cursor: crosshair; touch-action: none;
-  }
-  #guide-overlay { position: absolute; top: 0; left: 0; pointer-events: none; opacity: .15; }
-  #practice-canvas { display: block; }
-
-  .info-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .9rem; }
-  .info-table th { background: #a0400a; color: #fff; padding: .5rem .8rem; text-align: left; }
-  .info-table td { padding: .45rem .8rem; border-bottom: 1px solid #e8d5b0; }
-  .info-table tr:nth-child(even) td { background: #fdf0d8; }
-  .deva-big { font-size: 1.6rem; color: var(--accent); }
-
-  .quiz-box {
-    background: var(--panel); border: 1.5px solid var(--border);
-    border-radius: 12px; padding: 1.5rem; text-align: center; margin: 1rem 0;
-  }
-  #quiz-char { font-size: 5rem; color: var(--accent); line-height: 1; margin: .5rem 0 1rem; }
-  #quiz-options { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; margin: 1rem 0; }
-  #quiz-options button {
-    padding: .5rem 1.2rem; border-radius: 8px;
-    border: 1.5px solid var(--border); background: var(--panel);
-    cursor: pointer; font-size: .95rem; transition: all .15s;
-  }
-  #quiz-options button:hover { background: #f0dfc0; }
-  #quiz-options button.correct { background: #2ecc71; color: #fff; border-color: #2ecc71; }
-  #quiz-options button.wrong   { background: #e74c3c; color: #fff; border-color: #e74c3c; }
-  #quiz-feedback { font-size: 1rem; min-height: 1.5rem; margin: .5rem 0; }
-  #quiz-score { font-size: .9rem; color: var(--muted); }
-
-  .halant-row { display: flex; align-items: center; gap: .6rem; margin: .4rem 0; flex-wrap: wrap; }
-  .halant-char { font-size: 1.8rem; min-width: 2.2rem; text-align: center; color: var(--accent); }
-  .halant-arrow { color: var(--muted); }
-  .halant-virама { font-size: 1.8rem; color: var(--accent2); }
-
-  .conjunct-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: .6rem; margin: .8rem 0;
-  }
-  .conjunct-card {
-    background: var(--panel); border: 1px solid var(--border);
-    border-radius: 8px; padding: .5rem; text-align: center;
-  }
-  .conjunct-deva { font-size: 1.8rem; color: var(--accent); }
-  .conjunct-comp { font-size: .75rem; color: var(--muted); margin-top: .2rem; }
-
-  footer {
-    text-align: center; font-size: .8rem; color: var(--muted);
-    padding: 1.5rem; border-top: 1px solid var(--border);
-    background: #f0e8d8;
-  }
+  body { font-family: 'Segoe UI','Noto Sans',Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+  header { background:linear-gradient(135deg,#6b2500,#a0400a,#6b2500); color:#fff8ee; text-align:center; padding:2rem 1rem 1.5rem; border-bottom:4px solid var(--border); }
+  header h1 { font-size:2rem; letter-spacing:.05em; }
+  header h2 { font-size:1.1rem; font-weight:400; opacity:.85; margin-top:.3rem; }
+  header p  { font-size:.9rem; opacity:.7; margin-top:.5rem; }
+  .tabs { display:flex; flex-wrap:wrap; gap:.4rem; background:#5a1e00; padding:.6rem 1rem; position:sticky; top:0; z-index:100; }
+  .tabs button { background:transparent; border:1px solid #c87830; color:#ffd8a0; padding:.35rem .85rem; border-radius:20px; cursor:pointer; font-size:.85rem; transition:all .2s; }
+  .tabs button:hover, .tabs button.active { background:#c87830; color:#fff; }
+  .container { max-width:1100px; margin:0 auto; padding:1.5rem 1rem 3rem; }
+  .section { display:none; } .section.active { display:block; }
+  h3.section-title { font-size:1.3rem; color:var(--accent); border-bottom:2px solid var(--border); padding-bottom:.4rem; margin:1.5rem 0 1rem; }
+  .group-label { font-size:.8rem; font-weight:700; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; margin:1.2rem 0 .5rem; }
+  .varna-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:.7rem; }
+  @media(max-width:600px){ .varna-grid{ grid-template-columns:repeat(3,1fr); } }
+  .varna-card { background:var(--panel); border:1.5px solid var(--border); border-radius:10px; padding:.7rem .5rem .5rem; text-align:center; cursor:pointer; transition:transform .15s,box-shadow .15s; user-select:none; }
+  .varna-card:hover { transform:translateY(-3px); box-shadow:0 4px 12px rgba(139,58,0,.18); }
+  .varna-card.selected { border-color:var(--accent2); box-shadow:0 0 0 2px var(--accent2); }
+  .varna-deva { font-size:2.2rem; line-height:1; color:var(--accent); }
+  .varna-roman { font-size:.8rem; color:var(--muted); margin-top:.2rem; font-style:italic; }
+  .varna-iast { font-size:.75rem; color:#a07840; }
+  .stroke-panel { background:var(--panel); border:1.5px solid var(--border); border-radius:12px; padding:1.2rem; margin:1rem 0; }
+  .stroke-panel h4 { font-size:1rem; color:var(--accent); margin-bottom:.8rem; }
+  .stroke-steps { display:flex; flex-wrap:wrap; gap:.8rem; align-items:flex-start; }
+  .stroke-step { display:flex; flex-direction:column; align-items:center; gap:.3rem; }
+  .stroke-step .step-num { font-size:.7rem; color:var(--muted); font-weight:700; }
+  .stroke-step svg { border:1px solid #d4a96a; border-radius:6px; background:#fff; }
+  .practice-area { background:var(--panel); border:1.5px solid var(--border); border-radius:12px; padding:1.2rem; margin:1rem 0; }
+  .practice-area h4 { font-size:1rem; color:var(--accent); margin-bottom:.8rem; }
+  .canvas-toolbar { display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:.7rem; align-items:center; }
+  .canvas-toolbar label { font-size:.85rem; color:var(--muted); }
+  .canvas-toolbar input[type=range] { width:90px; }
+  .canvas-toolbar input[type=color] { width:36px; height:28px; border:1px solid var(--border); border-radius:4px; cursor:pointer; }
+  .btn { background:var(--accent); color:#fff; border:none; border-radius:6px; padding:.35rem .8rem; cursor:pointer; font-size:.85rem; transition:background .15s; }
+  .btn:hover { background:#6b2500; }
+  .btn.secondary { background:transparent; color:var(--accent); border:1.5px solid var(--accent); }
+  .btn.secondary:hover { background:var(--accent); color:#fff; }
+  .canvas-wrap { position:relative; display:inline-block; border:2px solid var(--border); border-radius:8px; overflow:hidden; cursor:crosshair; touch-action:none; }
+  #guide-overlay { position:absolute; top:0; left:0; pointer-events:none; opacity:.15; }
+  #practice-canvas { display:block; }
+  .info-table { width:100%; border-collapse:collapse; margin:1rem 0; font-size:.9rem; }
+  .info-table th { background:#a0400a; color:#fff; padding:.5rem .8rem; text-align:left; }
+  .info-table td { padding:.45rem .8rem; border-bottom:1px solid #e8d5b0; }
+  .info-table tr:nth-child(even) td { background:#fdf0d8; }
+  .deva-big { font-size:1.6rem; color:var(--accent); }
+  .quiz-box { background:var(--panel); border:1.5px solid var(--border); border-radius:12px; padding:1.5rem; text-align:center; margin:1rem 0; }
+  #quiz-char { font-size:5rem; color:var(--accent); line-height:1; margin:.5rem 0 1rem; }
+  #quiz-options { display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center; margin:1rem 0; }
+  #quiz-options button { padding:.5rem 1.2rem; border-radius:8px; border:1.5px solid var(--border); background:var(--panel); cursor:pointer; font-size:.95rem; transition:all .15s; }
+  #quiz-options button:hover { background:#f0dfc0; }
+  #quiz-options button.correct { background:#2ecc71; color:#fff; border-color:#2ecc71; }
+  #quiz-options button.wrong { background:#e74c3c; color:#fff; border-color:#e74c3c; }
+  #quiz-feedback { font-size:1rem; min-height:1.5rem; margin:.5rem 0; }
+  #quiz-score { font-size:.9rem; color:var(--muted); }
+  .halant-row { display:flex; align-items:center; gap:.6rem; margin:.4rem 0; flex-wrap:wrap; }
+  .halant-char { font-size:1.8rem; min-width:2.2rem; text-align:center; color:var(--accent); }
+  .halant-arrow { color:var(--muted); }
+  .conjunct-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(100px,1fr)); gap:.6rem; margin:.8rem 0; }
+  .conjunct-card { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:.5rem; text-align:center; }
+  .conjunct-deva { font-size:1.8rem; color:var(--accent); }
+  .conjunct-comp { font-size:.75rem; color:var(--muted); margin-top:.2rem; }
+  .stroke-legend { display:flex; flex-wrap:wrap; gap:.8rem; margin:.5rem 0 1rem; font-size:.85rem; }
+  .stroke-legend span { display:flex; align-items:center; gap:.3rem; }
+  .legend-dot { width:12px; height:12px; border-radius:50%; display:inline-block; }
+  footer { text-align:center; font-size:.8rem; color:var(--muted); padding:1.5rem; border-top:1px solid var(--border); background:#f0e8d8; }
 </style>
 </head>
 <body>
@@ -195,76 +85,66 @@
   <p>含筆順 SVG 引導 · 互動練習畫布 · 測驗模式</p>
 </header>
 
-<nav class="tabs" id="main-tabs">
+<nav class="tabs">
   <button class="active" onclick="showSection('chart')">📋 輔音表</button>
   <button onclick="showSection('strokes')">✏️ 筆順引導</button>
   <button onclick="showSection('practice')">🖊️ 練習畫布</button>
-  <button onclick="showSection('halanta')">🔗 末尾輔音 (Halanta)</button>
-  <button onclick="showSection('conjuncts')">🔤 複合字 (Conjuncts)</button>
+  <button onclick="showSection('halanta')">🔗 末尾輔音</button>
+  <button onclick="showSection('conjuncts')">🔤 複合字</button>
   <button onclick="showSection('quiz')">🧠 測驗</button>
   <button onclick="showSection('reference')">📖 參考表</button>
 </nav>
 
 <div class="container">
 
+<!-- CHART -->
 <div id="chart" class="section active">
   <h3 class="section-title">天城體輔音總覽</h3>
-  <p style="font-size:.9rem;color:var(--muted);margin-bottom:1rem;">點擊任意字母，在下方查看詳細資訊與筆順。共 33 個基本輔音，依發音部位排列。</p>
-  <div class="group-label">喉音 (Ka-varga) — 軟顎音</div>
-  <div class="varna-grid" id="grid-ka"></div>
-  <div class="group-label">顎音 (Ca-varga) — 硬顎音</div>
-  <div class="varna-grid" id="grid-ca"></div>
-  <div class="group-label">捲舌音 (Ṭa-varga) — 捲舌音</div>
-  <div class="varna-grid" id="grid-ta-retro"></div>
-  <div class="group-label">齒音 (Ta-varga) — 齒音</div>
-  <div class="varna-grid" id="grid-ta"></div>
-  <div class="group-label">唇音 (Pa-varga) — 唇音</div>
-  <div class="varna-grid" id="grid-pa"></div>
-  <div class="group-label">半元音 (Antaḥstha)</div>
-  <div class="varna-grid" id="grid-semi"></div>
-  <div class="group-label">摩擦音 / 氣音 (Ūṣman)</div>
-  <div class="varna-grid" id="grid-sibilant"></div>
+  <p style="font-size:.9rem;color:var(--muted);margin-bottom:1rem;">點擊任意字母查看詳情與筆順。共 33 個基本輔音，依發音部位排列。</p>
+  <div class="group-label">喉音 Ka-varga — 軟顎音</div><div class="varna-grid" id="grid-ka"></div>
+  <div class="group-label">顎音 Ca-varga — 硬顎音</div><div class="varna-grid" id="grid-ca"></div>
+  <div class="group-label">捲舌音 Ṭa-varga</div><div class="varna-grid" id="grid-ta-retro"></div>
+  <div class="group-label">齒音 Ta-varga</div><div class="varna-grid" id="grid-ta"></div>
+  <div class="group-label">唇音 Pa-varga</div><div class="varna-grid" id="grid-pa"></div>
+  <div class="group-label">半元音 Antaḥstha</div><div class="varna-grid" id="grid-semi"></div>
+  <div class="group-label">摩擦音／氣音 Ūṣman</div><div class="varna-grid" id="grid-sibilant"></div>
   <div id="char-detail" style="display:none;margin-top:1.5rem;">
-    <div class="stroke-panel">
-      <h4 id="detail-title">字母詳情</h4>
-      <div id="detail-body"></div>
-    </div>
+    <div class="stroke-panel"><h4 id="detail-title">字母詳情</h4><div id="detail-body"></div></div>
   </div>
 </div>
 
+<!-- STROKES -->
 <div id="strokes" class="section">
   <h3 class="section-title">筆順 SVG 引導</h3>
-  <p style="font-size:.9rem;color:var(--muted);margin-bottom:1rem;">
-    選擇字母後查看逐步筆順動畫。顏色表示筆畫順序：
-    <span style="color:#e74c3c">●</span> 第1筆
-    <span style="color:#2980b9">●</span> 第2筆
-    <span style="color:#27ae60">●</span> 第3筆
-    <span style="color:#8e44ad">●</span> 第4筆
-  </p>
+  <div class="stroke-legend">
+    <span><span class="legend-dot" style="background:#e74c3c"></span>第1筆</span>
+    <span><span class="legend-dot" style="background:#2980b9"></span>第2筆</span>
+    <span><span class="legend-dot" style="background:#27ae60"></span>第3筆</span>
+    <span><span class="legend-dot" style="background:#8e44ad"></span>第4筆</span>
+    <span><span class="legend-dot" style="background:#e67e22"></span>第5筆</span>
+    <span style="color:var(--muted);font-style:italic;">※ 頂橫線（shirorēkhā）永遠最後畫</span>
+  </div>
   <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;" id="stroke-selector"></div>
-  <div id="stroke-display">
-    <div class="stroke-panel">
-      <h4 id="stroke-char-title">請選擇上方字母</h4>
-      <div class="stroke-steps" id="stroke-steps-container"></div>
-    </div>
-    <div class="stroke-panel" style="margin-top:.8rem;">
-      <h4>完整字母動畫</h4>
-      <div id="stroke-anim-container" style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
-        <svg id="stroke-anim-svg" width="120" height="120" viewBox="0 0 100 100"
-             style="border:1px solid #d4a96a;border-radius:8px;background:#fff;"></svg>
-        <div>
-          <button class="btn" onclick="playStrokeAnim()">▶ 播放動畫</button>
-          <button class="btn secondary" style="margin-left:.4rem;" onclick="resetStrokeAnim()">↺ 重置</button>
-          <div style="margin-top:.6rem;font-size:.85rem;color:var(--muted);">
-            速度: <input type="range" id="anim-speed" min="200" max="2000" value="800" style="width:80px;">
-          </div>
-          <div id="anim-label" style="font-size:.85rem;color:var(--muted);margin-top:.4rem;"></div>
-        </div>
+  <div class="stroke-panel">
+    <h4 id="stroke-char-title">請選擇上方字母</h4>
+    <div class="stroke-steps" id="stroke-steps-container"></div>
+  </div>
+  <div class="stroke-panel" style="margin-top:.8rem;">
+    <h4>動畫播放</h4>
+    <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
+      <svg id="stroke-anim-svg" width="140" height="140" viewBox="0 0 100 100"
+           style="border:1px solid var(--border);border-radius:8px;background:#fff;"></svg>
+      <div>
+        <button class="btn" onclick="playStrokeAnim()">▶ 播放</button>
+        <button class="btn secondary" style="margin-left:.4rem;" onclick="resetStrokeAnim()">↺ 重置</button>
+        <div style="margin-top:.6rem;font-size:.85rem;color:var(--muted);">速度: <input type="range" id="anim-speed" min="300" max="2000" value="900" style="width:80px;"></div>
+        <div id="anim-label" style="font-size:.85rem;color:var(--muted);margin-top:.4rem;"></div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- PRACTICE -->
 <div id="practice" class="section">
   <h3 class="section-title">練習畫布</h3>
   <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1rem;align-items:flex-start;">
@@ -272,7 +152,7 @@
       <div class="group-label">選擇練習字母</div>
       <div style="display:flex;flex-wrap:wrap;gap:.4rem;max-width:500px;" id="practice-selector"></div>
     </div>
-    <div id="practice-ref" style="text-align:center;min-width:100px;">
+    <div style="text-align:center;min-width:100px;">
       <div class="group-label">參考字母</div>
       <div id="practice-ref-char" style="font-size:5rem;color:var(--accent);line-height:1;">क</div>
       <div id="practice-ref-roman" style="font-size:.9rem;color:var(--muted);">ka</div>
@@ -286,52 +166,42 @@
       <button class="btn" onclick="clearCanvas()">清除</button>
       <button class="btn secondary" onclick="toggleGuide()">切換參考線</button>
       <button class="btn secondary" onclick="downloadCanvas()">下載</button>
-      <label style="display:flex;align-items:center;gap:.3rem;">
-        <input type="checkbox" id="show-grid" onchange="drawGrid()" checked> 格線
-      </label>
+      <label><input type="checkbox" id="show-grid" onchange="drawGrid()" checked> 格線</label>
     </div>
-    <div class="canvas-wrap" id="canvas-wrap">
+    <div class="canvas-wrap">
       <canvas id="practice-canvas" width="560" height="320"></canvas>
       <canvas id="guide-overlay" width="560" height="320"></canvas>
     </div>
-    <div style="font-size:.8rem;color:var(--muted);margin-top:.5rem;">
-      提示：虛線為天城體頂線（शिरोरेखा shirorēkhā）位置，粗虛線為字母基線。
-    </div>
+    <div style="font-size:.8rem;color:var(--muted);margin-top:.5rem;">虛線：天城體頂線位置（shirorēkhā）；粗虛線：基線。</div>
   </div>
   <div class="practice-area" style="margin-top:1rem;">
     <h4>多格練習紙（可列印）</h4>
     <div class="canvas-toolbar">
-      <label>格數: <input type="range" id="grid-count" min="4" max="16" value="8">
-        <span id="grid-count-val">8</span></label>
+      <label>格數: <input type="range" id="grid-count" min="4" max="16" value="8"> <span id="grid-count-val">8</span></label>
       <button class="btn" onclick="generatePrintSheet()">產生練習紙</button>
     </div>
     <div id="print-sheet" style="margin-top:.5rem;"></div>
   </div>
 </div>
 
+<!-- HALANTA -->
 <div id="halanta" class="section">
   <h3 class="section-title">末尾輔音 — Halanta / Virāma (्)</h3>
-  <p style="font-size:.9rem;color:var(--muted);margin-bottom:1rem;">
-    Virāma（्）符號加在輔音下方，表示取消母音 'a'，使輔音成為純輔音（末尾輔音）。例：क + ् = क्
-  </p>
+  <p style="font-size:.9rem;color:var(--muted);margin-bottom:1rem;">Virāma（्）加在輔音下方，取消母音 'a'。例：क + ् = क्</p>
   <div id="halanta-list"></div>
 </div>
 
+<!-- CONJUNCTS -->
 <div id="conjuncts" class="section">
-  <h3 class="section-title">複合字 (Saṃyuktākṣara / Conjunct Consonants)</h3>
-  <p style="font-size:.9rem;color:var(--muted);margin-bottom:1rem;">
-    兩個或多個輔音連接時形成複合字。常見形式：半字形（半-子音）或合字。
-  </p>
-  <div class="group-label">k + 系列複合字</div>
-  <div class="conjunct-grid" id="conj-k"></div>
-  <div class="group-label">t + 系列複合字</div>
-  <div class="conjunct-grid" id="conj-t"></div>
-  <div class="group-label">n + 系列複合字</div>
-  <div class="conjunct-grid" id="conj-n"></div>
-  <div class="group-label">常見特殊複合字</div>
-  <div class="conjunct-grid" id="conj-special"></div>
+  <h3 class="section-title">複合字 Saṃyuktākṣara</h3>
+  <p style="font-size:.9rem;color:var(--muted);margin-bottom:1rem;">兩個或多個輔音連接時形成複合字。</p>
+  <div class="group-label">k + 系列</div><div class="conjunct-grid" id="conj-k"></div>
+  <div class="group-label">t + 系列</div><div class="conjunct-grid" id="conj-t"></div>
+  <div class="group-label">n + 系列</div><div class="conjunct-grid" id="conj-n"></div>
+  <div class="group-label">常見特殊複合字</div><div class="conjunct-grid" id="conj-special"></div>
 </div>
 
+<!-- QUIZ -->
 <div id="quiz" class="section">
   <h3 class="section-title">輔音辨認測驗</h3>
   <div class="quiz-box">
@@ -343,8 +213,7 @@
     <div style="margin-top:1rem;display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;">
       <button class="btn" onclick="nextQuiz()">下一題</button>
       <button class="btn secondary" onclick="resetQuiz()">重置</button>
-      <label style="font-size:.85rem;color:var(--muted);display:flex;align-items:center;gap:.3rem;">
-        模式:
+      <label style="font-size:.85rem;color:var(--muted);display:flex;align-items:center;gap:.3rem;">模式:
         <select id="quiz-mode" style="border:1px solid var(--border);border-radius:4px;padding:.2rem;">
           <option value="deva2roman">天城體 → 羅馬拼音</option>
           <option value="roman2deva">羅馬拼音 → 天城體</option>
@@ -354,15 +223,11 @@
   </div>
 </div>
 
+<!-- REFERENCE -->
 <div id="reference" class="section">
   <h3 class="section-title">完整參考表</h3>
-  <table class="info-table" id="ref-table">
-    <thead>
-      <tr>
-        <th>天城體</th><th>IAST</th><th>羅馬拼音</th>
-        <th>發音部位</th><th>發音方式</th><th>Unicode</th>
-      </tr>
-    </thead>
+  <table class="info-table">
+    <thead><tr><th>天城體</th><th>IAST</th><th>羅馬拼音</th><th>發音部位</th><th>發音方式</th><th>Unicode</th></tr></thead>
     <tbody id="ref-tbody"></tbody>
   </table>
 </div>
@@ -370,404 +235,720 @@
 </div>
 
 <footer>
-  天城體輔音表 | Sanskrit / Devanagari Vyañjana Varṇamālā<br>
-  依傳統梵文文法（Pāṇini 體系）排列 · 含 IAST 國際梵文音譯標準
+  天城體輔音表 | Sanskrit Devanagari Vyañjana Varṇamālā<br>
+  依 Pāṇini 體系排列 · IAST 國際梵文音譯標準 · 筆順依 shirorēkhā 最後原則
 </footer>
 
 <script>
+// ═══════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════
 const CONSONANTS = [
-  { deva:'क', iast:'k',  roman:'ka',  group:'ka', place:'軟顎 (Velar)',    manner:'無聲不送氣 (Voiceless unaspirated)',  unicode:'U+0915' },
-  { deva:'ख', iast:'kh', roman:'kha', group:'ka', place:'軟顎 (Velar)',    manner:'無聲送氣 (Voiceless aspirated)',      unicode:'U+0916' },
-  { deva:'ग', iast:'g',  roman:'ga',  group:'ka', place:'軟顎 (Velar)',    manner:'有聲不送氣 (Voiced unaspirated)',     unicode:'U+0917' },
-  { deva:'घ', iast:'gh', roman:'gha', group:'ka', place:'軟顎 (Velar)',    manner:'有聲送氣 (Voiced aspirated)',         unicode:'U+0918' },
-  { deva:'ङ', iast:'ṅ',  roman:'nga', group:'ka', place:'軟顎 (Velar)',    manner:'鼻音 (Nasal)',                        unicode:'U+0919' },
-  { deva:'च', iast:'c',  roman:'ca',  group:'ca', place:'硬顎 (Palatal)',  manner:'無聲不送氣 (Voiceless unaspirated)',  unicode:'U+091A' },
-  { deva:'छ', iast:'ch', roman:'cha', group:'ca', place:'硬顎 (Palatal)',  manner:'無聲送氣 (Voiceless aspirated)',      unicode:'U+091B' },
-  { deva:'ज', iast:'j',  roman:'ja',  group:'ca', place:'硬顎 (Palatal)',  manner:'有聲不送氣 (Voiced unaspirated)',     unicode:'U+091C' },
-  { deva:'झ', iast:'jh', roman:'jha', group:'ca', place:'硬顎 (Palatal)',  manner:'有聲送氣 (Voiced aspirated)',         unicode:'U+091D' },
-  { deva:'ञ', iast:'ñ',  roman:'nya', group:'ca', place:'硬顎 (Palatal)',  manner:'鼻音 (Nasal)',                        unicode:'U+091E' },
-  { deva:'ट', iast:'ṭ',  roman:'ṭa',  group:'ta-retro', place:'捲舌 (Retroflex)', manner:'無聲不送氣', unicode:'U+091F' },
-  { deva:'ठ', iast:'ṭh', roman:'ṭha', group:'ta-retro', place:'捲舌 (Retroflex)', manner:'無聲送氣',   unicode:'U+0920' },
-  { deva:'ड', iast:'ḍ',  roman:'ḍa',  group:'ta-retro', place:'捲舌 (Retroflex)', manner:'有聲不送氣', unicode:'U+0921' },
-  { deva:'ढ', iast:'ḍh', roman:'ḍha', group:'ta-retro', place:'捲舌 (Retroflex)', manner:'有聲送氣',   unicode:'U+0922' },
-  { deva:'ण', iast:'ṇ',  roman:'ṇa',  group:'ta-retro', place:'捲舌 (Retroflex)', manner:'鼻音',       unicode:'U+0923' },
-  { deva:'त', iast:'t',  roman:'ta',  group:'ta', place:'齒音 (Dental)',   manner:'無聲不送氣', unicode:'U+0924' },
-  { deva:'थ', iast:'th', roman:'tha', group:'ta', place:'齒音 (Dental)',   manner:'無聲送氣',   unicode:'U+0925' },
-  { deva:'द', iast:'d',  roman:'da',  group:'ta', place:'齒音 (Dental)',   manner:'有聲不送氣', unicode:'U+0926' },
-  { deva:'ध', iast:'dh', roman:'dha', group:'ta', place:'齒音 (Dental)',   manner:'有聲送氣',   unicode:'U+0927' },
-  { deva:'न', iast:'n',  roman:'na',  group:'ta', place:'齒音 (Dental)',   manner:'鼻音',       unicode:'U+0928' },
-  { deva:'प', iast:'p',  roman:'pa',  group:'pa', place:'唇音 (Labial)',   manner:'無聲不送氣', unicode:'U+092A' },
-  { deva:'फ', iast:'ph', roman:'pha', group:'pa', place:'唇音 (Labial)',   manner:'無聲送氣',   unicode:'U+092B' },
-  { deva:'ब', iast:'b',  roman:'ba',  group:'pa', place:'唇音 (Labial)',   manner:'有聲不送氣', unicode:'U+092C' },
-  { deva:'भ', iast:'bh', roman:'bha', group:'pa', place:'唇音 (Labial)',   manner:'有聲送氣',   unicode:'U+092D' },
-  { deva:'म', iast:'m',  roman:'ma',  group:'pa', place:'唇音 (Labial)',   manner:'鼻音',       unicode:'U+092E' },
-  { deva:'य', iast:'y',  roman:'ya',  group:'semi', place:'硬顎 (Palatal)',    manner:'半元音 (Semivowel)', unicode:'U+092F' },
-  { deva:'र', iast:'r',  roman:'ra',  group:'semi', place:'捲舌 (Retroflex)', manner:'顫音 (Trill/Flap)',  unicode:'U+0930' },
-  { deva:'ल', iast:'l',  roman:'la',  group:'semi', place:'齒音 (Dental)',    manner:'邊音 (Lateral)',     unicode:'U+0932' },
-  { deva:'व', iast:'v',  roman:'va',  group:'semi', place:'唇齒 (Labiodental)', manner:'半元音 (Semivowel)', unicode:'U+0935' },
-  { deva:'श', iast:'ś',  roman:'śa',  group:'sibilant', place:'硬顎 (Palatal)',    manner:'摩擦音 (Fricative)', unicode:'U+0936' },
-  { deva:'ष', iast:'ṣ',  roman:'ṣa',  group:'sibilant', place:'捲舌 (Retroflex)', manner:'摩擦音 (Fricative)', unicode:'U+0937' },
-  { deva:'स', iast:'s',  roman:'sa',  group:'sibilant', place:'齒音 (Dental)',    manner:'摩擦音 (Fricative)', unicode:'U+0938' },
-  { deva:'ह', iast:'h',  roman:'ha',  group:'sibilant', place:'聲門 (Glottal)',   manner:'氣音 (Aspirate)',   unicode:'U+0939' },
+  {deva:'क',iast:'k', roman:'ka', group:'ka', place:'軟顎 (Velar)',    manner:'無聲不送氣', unicode:'U+0915'},
+  {deva:'ख',iast:'kh',roman:'kha',group:'ka', place:'軟顎 (Velar)',    manner:'無聲送氣',   unicode:'U+0916'},
+  {deva:'ग',iast:'g', roman:'ga', group:'ka', place:'軟顎 (Velar)',    manner:'有聲不送氣', unicode:'U+0917'},
+  {deva:'घ',iast:'gh',roman:'gha',group:'ka', place:'軟顎 (Velar)',    manner:'有聲送氣',   unicode:'U+0918'},
+  {deva:'ङ',iast:'ṅ', roman:'ṅa', group:'ka', place:'軟顎 (Velar)',    manner:'鼻音',       unicode:'U+0919'},
+  {deva:'च',iast:'c', roman:'ca', group:'ca', place:'硬顎 (Palatal)',  manner:'無聲不送氣', unicode:'U+091A'},
+  {deva:'छ',iast:'ch',roman:'cha',group:'ca', place:'硬顎 (Palatal)',  manner:'無聲送氣',   unicode:'U+091B'},
+  {deva:'ज',iast:'j', roman:'ja', group:'ca', place:'硬顎 (Palatal)',  manner:'有聲不送氣', unicode:'U+091C'},
+  {deva:'झ',iast:'jh',roman:'jha',group:'ca', place:'硬顎 (Palatal)',  manner:'有聲送氣',   unicode:'U+091D'},
+  {deva:'ञ',iast:'ñ', roman:'ña', group:'ca', place:'硬顎 (Palatal)',  manner:'鼻音',       unicode:'U+091E'},
+  {deva:'ट',iast:'ṭ', roman:'ṭa', group:'ta-retro',place:'捲舌 (Retroflex)',manner:'無聲不送氣',unicode:'U+091F'},
+  {deva:'ठ',iast:'ṭh',roman:'ṭha',group:'ta-retro',place:'捲舌 (Retroflex)',manner:'無聲送氣',  unicode:'U+0920'},
+  {deva:'ड',iast:'ḍ', roman:'ḍa', group:'ta-retro',place:'捲舌 (Retroflex)',manner:'有聲不送氣',unicode:'U+0921'},
+  {deva:'ढ',iast:'ḍh',roman:'ḍha',group:'ta-retro',place:'捲舌 (Retroflex)',manner:'有聲送氣',  unicode:'U+0922'},
+  {deva:'ण',iast:'ṇ', roman:'ṇa', group:'ta-retro',place:'捲舌 (Retroflex)',manner:'鼻音',      unicode:'U+0923'},
+  {deva:'त',iast:'t', roman:'ta', group:'ta', place:'齒音 (Dental)',   manner:'無聲不送氣', unicode:'U+0924'},
+  {deva:'थ',iast:'th',roman:'tha',group:'ta', place:'齒音 (Dental)',   manner:'無聲送氣',   unicode:'U+0925'},
+  {deva:'द',iast:'d', roman:'da', group:'ta', place:'齒音 (Dental)',   manner:'有聲不送氣', unicode:'U+0926'},
+  {deva:'ध',iast:'dh',roman:'dha',group:'ta', place:'齒音 (Dental)',   manner:'有聲送氣',   unicode:'U+0927'},
+  {deva:'न',iast:'n', roman:'na', group:'ta', place:'齒音 (Dental)',   manner:'鼻音',       unicode:'U+0928'},
+  {deva:'प',iast:'p', roman:'pa', group:'pa', place:'唇音 (Labial)',   manner:'無聲不送氣', unicode:'U+092A'},
+  {deva:'फ',iast:'ph',roman:'pha',group:'pa', place:'唇音 (Labial)',   manner:'無聲送氣',   unicode:'U+092B'},
+  {deva:'ब',iast:'b', roman:'ba', group:'pa', place:'唇音 (Labial)',   manner:'有聲不送氣', unicode:'U+092C'},
+  {deva:'भ',iast:'bh',roman:'bha',group:'pa', place:'唇音 (Labial)',   manner:'有聲送氣',   unicode:'U+092D'},
+  {deva:'म',iast:'m', roman:'ma', group:'pa', place:'唇音 (Labial)',   manner:'鼻音',       unicode:'U+092E'},
+  {deva:'य',iast:'y', roman:'ya', group:'semi',place:'硬顎 (Palatal)', manner:'半元音',     unicode:'U+092F'},
+  {deva:'र',iast:'r', roman:'ra', group:'semi',place:'捲舌 (Retroflex)',manner:'顫音',      unicode:'U+0930'},
+  {deva:'ल',iast:'l', roman:'la', group:'semi',place:'齒音 (Dental)',  manner:'邊音',       unicode:'U+0932'},
+  {deva:'व',iast:'v', roman:'va', group:'semi',place:'唇齒 (Labiodental)',manner:'半元音',  unicode:'U+0935'},
+  {deva:'श',iast:'ś', roman:'śa', group:'sibilant',place:'硬顎 (Palatal)',manner:'摩擦音', unicode:'U+0936'},
+  {deva:'ष',iast:'ṣ', roman:'ṣa', group:'sibilant',place:'捲舌 (Retroflex)',manner:'摩擦音',unicode:'U+0937'},
+  {deva:'स',iast:'s', roman:'sa', group:'sibilant',place:'齒音 (Dental)',manner:'摩擦音',  unicode:'U+0938'},
+  {deva:'ह',iast:'h', roman:'ha', group:'sibilant',place:'聲門 (Glottal)',manner:'氣音',   unicode:'U+0939'},
 ];
 
+// ═══════════════════════════════════════════
+// STROKE DATA — 修正版
+// 原則：字母主體筆畫先行，頂橫線（shirorēkhā）永遠最後一筆
+// ★ 短頂橫線：थ ध भ श （研究確認）
+// ★ 有右側豎線：ग घ ड ढ ण न य 等24個輔音
+// ★ र 最簡單，只需2筆
+// ═══════════════════════════════════════════
 const STROKE_DATA = {
-  'क': { strokes:[{d:'M 30,20 L 30,80',label:'左豎'},{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,22 Q 70,35 65,55 Q 60,70 45,75',label:'右側弧'}], note:'先畫左豎，再畫頂線（shirorēkhā），最後畫右弧形主體。' },
-  'ख': { strokes:[{d:'M 50,20 L 50,80',label:'中豎'},{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 20,45 Q 50,30 80,45',label:'上弧'},{d:'M 20,55 Q 50,70 80,55',label:'下弧'}], note:'中豎先行，頂線次之，再畫上下兩道弧線。' },
-  'ग': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 35,20 L 35,80',label:'左豎'},{d:'M 35,50 L 75,50 L 75,80',label:'中橫折'}], note:'頂線 → 左豎 → 中橫向右再向下。' },
-  'घ': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 30,20 L 30,80',label:'左豎'},{d:'M 30,45 L 70,45 L 70,20',label:'上橫折'},{d:'M 70,45 L 70,80',label:'右豎'}], note:'頂線 → 左豎 → 上橫 → 右豎。' },
-  'ङ': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 30,20 C 20,40 20,60 30,75',label:'左弧'},{d:'M 30,75 Q 50,85 70,75',label:'底橫弧'},{d:'M 70,75 C 80,60 80,40 70,20',label:'右弧'}], note:'頂線後，畫左弧、底弧、右弧形成圓形。' },
-  'च': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 L 50,80',label:'中豎'},{d:'M 20,50 Q 35,40 50,50',label:'左上弧'},{d:'M 20,50 L 20,80',label:'左豎下'}], note:'頂線 → 中豎 → 左上弧 → 左豎延伸。' },
-  'छ': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 30,20 Q 20,50 30,80',label:'左弧豎'},{d:'M 50,20 Q 80,35 75,55 Q 70,70 55,78',label:'右半圓'},{d:'M 55,55 L 75,55',label:'中橫'}], note:'頂線 → 左弧豎 → 右半圓 → 中橫。' },
-  'ज': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 Q 80,35 75,55 Q 70,75 50,80',label:'右弧'},{d:'M 25,55 L 65,55',label:'中橫'}], note:'頂線 → 右弧 → 中橫。' },
-  'झ': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 30,20 L 30,80',label:'左豎'},{d:'M 30,20 Q 60,30 60,50 Q 60,70 40,78',label:'右上弧'},{d:'M 30,50 L 60,50',label:'中橫'}], note:'頂線 → 左豎 → 右弧 → 中橫。' },
-  'ञ': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 35,20 Q 20,40 25,65 Q 30,80 45,80',label:'左弧'},{d:'M 45,80 Q 65,80 70,65 Q 75,40 60,20',label:'右弧'},{d:'M 50,40 L 50,70',label:'中豎'}], note:'頂線 → 左弧 → 右弧 → 中豎。' },
-  'ट': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 Q 80,35 75,60 Q 70,80 50,82',label:'右弧'},{d:'M 50,82 Q 30,82 28,62 Q 26,42 50,40',label:'底弧'}], note:'頂線後，從右往左畫圓形主體。' },
-  'ठ': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 L 50,80',label:'中豎'},{d:'M 25,50 Q 50,35 75,50 Q 50,65 25,50',label:'菱形'}], note:'頂線 → 中豎 → 菱形框。' },
-  'ड': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 Q 78,30 78,55 Q 78,78 50,82',label:'右半圓'},{d:'M 50,82 Q 22,78 22,55 Q 22,30 50,20',label:'左半圓'}], note:'頂線後畫圓形。' },
-  'ढ': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 Q 78,30 78,55 Q 78,78 50,82',label:'右半圓'},{d:'M 50,82 Q 22,78 22,55 Q 22,30 50,20',label:'左半圓'},{d:'M 65,18 Q 70,8 75,15',label:'頂鉤'}], note:'圓形主體同 ड，加頂右鉤。' },
-  'ण': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 Q 78,30 78,55 Q 78,78 50,82',label:'右半圓'},{d:'M 50,82 Q 22,78 22,55 Q 22,30 50,20',label:'左半圓'},{d:'M 50,40 L 50,82',label:'中豎'}], note:'圓形加中豎。' },
-  'त': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 L 50,80',label:'中豎'},{d:'M 20,45 L 50,45',label:'左橫'},{d:'M 50,45 Q 70,45 70,65 Q 70,80 55,82',label:'右弧'}], note:'頂線 → 中豎 → 左橫 → 右下弧。' },
-  'थ': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 L 50,80',label:'中豎'},{d:'M 25,50 L 75,50',label:'中橫'},{d:'M 25,65 Q 50,80 75,65',label:'底弧'}], note:'頂線 → 中豎 → 中橫 → 底弧。' },
-  'द': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 Q 80,35 80,55 Q 80,80 50,80',label:'右半圓'},{d:'M 50,80 L 20,80',label:'底橫'},{d:'M 20,80 L 20,50 Q 20,30 35,25',label:'左回鉤'}], note:'頂線 → 右弧 → 底橫 → 左回鉤。' },
-  'ध': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 30,20 L 30,80',label:'左豎'},{d:'M 30,20 Q 60,20 65,35 Q 70,50 55,55',label:'右上弧'},{d:'M 30,55 L 55,55',label:'中橫'},{d:'M 55,55 Q 70,60 65,78 Q 60,85 45,82',label:'右下弧'}], note:'頂線 → 左豎 → 右上弧 → 中橫 → 右下弧。' },
-  'न': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 30,20 L 30,80',label:'左豎'},{d:'M 30,50 L 70,50',label:'中橫'},{d:'M 70,20 L 70,80',label:'右豎'}], note:'頂線 → 左豎 → 中橫 → 右豎。' },
-  'प': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 30,20 L 30,80',label:'左豎'},{d:'M 30,20 Q 75,20 75,45 Q 75,60 30,55',label:'右半框'}], note:'頂線 → 左豎 → 右向弧回。' },
-  'फ': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 30,20 L 30,80',label:'左豎'},{d:'M 30,20 Q 75,20 75,45 Q 75,60 30,55',label:'右半框'},{d:'M 60,18 Q 65,8 70,14',label:'頂右鉤'}], note:'同 प，加頂右鉤。' },
-  'ब': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 L 50,80',label:'中豎'},{d:'M 20,50 Q 20,20 50,20',label:'左上弧'},{d:'M 20,50 Q 20,80 50,80',label:'左下弧'}], note:'頂線 → 中豎 → 左上弧 → 左下弧。' },
-  'भ': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 L 50,80',label:'中豎'},{d:'M 20,50 Q 20,20 50,20',label:'左上弧'},{d:'M 20,50 Q 20,80 50,80',label:'左下弧'},{d:'M 50,50 Q 80,35 78,65 Q 75,80 50,80',label:'右弧'}], note:'同 ब，右側加弧。' },
-  'म': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 30,20 Q 20,50 30,80',label:'左弧豎'},{d:'M 30,55 Q 50,45 70,55',label:'中弧'},{d:'M 70,20 Q 80,50 70,80',label:'右弧豎'}], note:'頂線 → 左弧豎 → 中弧 → 右弧豎。' },
-  'य': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 L 50,80',label:'中豎'},{d:'M 20,45 Q 35,35 50,45',label:'左弧'},{d:'M 50,45 Q 75,45 75,65 Q 75,80 55,82',label:'右弧'}], note:'頂線 → 中豎 → 左弧 → 右下弧。' },
-  'र': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 Q 80,35 78,60 Q 75,78 55,82',label:'右弧'},{d:'M 40,50 L 70,50',label:'中橫'}], note:'頂線 → 右弧 → 中橫（重要特徵）。' },
-  'ल': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 L 50,80',label:'中豎'},{d:'M 20,65 Q 35,55 50,65',label:'左弧'},{d:'M 50,65 Q 65,75 65,82',label:'右下鉤'}], note:'頂線 → 中豎 → 左弧 → 右下鉤。' },
-  'व': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 30,20 L 30,80',label:'左豎'},{d:'M 30,20 Q 80,20 75,50 Q 70,80 30,80',label:'右大弧'}], note:'頂線 → 左豎 → 右大弧。' },
-  'श': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 L 50,80',label:'中豎'},{d:'M 20,45 Q 35,35 50,45',label:'左弧'},{d:'M 50,45 Q 65,35 80,45',label:'右弧'},{d:'M 50,65 Q 65,78 75,70',label:'右下裝飾'}], note:'頂線 → 中豎 → 雙側弧 → 右下裝飾。' },
-  'ष': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 Q 80,30 78,55 Q 75,78 55,82',label:'右半圓'},{d:'M 55,82 Q 35,82 28,60 Q 22,38 45,30',label:'左半圓'},{d:'M 50,45 L 50,80',label:'中豎'}], note:'頂線 → 圓形主體 → 中豎。' },
-  'स': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 L 50,80',label:'中豎'},{d:'M 20,40 Q 50,30 80,40',label:'上弧'},{d:'M 20,65 Q 50,75 80,65',label:'下弧'}], note:'頂線 → 中豎 → 上下兩弧。' },
-  'ह': { strokes:[{d:'M 20,20 L 80,20',label:'頂橫線'},{d:'M 50,20 L 50,80',label:'中豎'},{d:'M 20,50 Q 35,38 50,50',label:'左弧'},{d:'M 50,50 Q 70,38 80,50',label:'右弧'},{d:'M 65,50 Q 72,65 68,80',label:'右下豎'}], note:'頂線 → 中豎 → 雙弧 → 右下豎。' },
+  'क': {
+    strokes: [
+      {d:'M 42,28 C 30,34 19,52 26,68 C 30,78 42,80 52,74', label:'左弧形主體'},
+      {d:'M 56,28 Q 74,40 72,58 Q 69,72 58,76', label:'右鉤形'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 左弧 ② 右鉤 ③ 頂橫線。頂線永遠最後畫。'
+  },
+  'ख': {
+    strokes: [
+      {d:'M 30,30 Q 18,48 22,66 Q 26,78 40,78', label:'左弧'},
+      {d:'M 28,54 L 65,54 Q 78,52 75,28', label:'中橫向右折上'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 左弧 ② 中橫折上 ③ 頂橫線。'
+  },
+  'ग': {
+    strokes: [
+      {d:'M 62,28 Q 38,28 24,44 Q 16,58 24,72 Q 34,80 50,78 Q 62,74 66,64', label:'左弧（高爾夫球桿形）'},
+      {d:'M 74,28 L 74,80', label:'右豎'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 左弧（從右往左掃過，再向下鉤） ② 右豎 ③ 頂橫線。'
+  },
+  'घ': {
+    strokes: [
+      {d:'M 34,28 Q 18,40 16,58 Q 16,76 32,80', label:'左弧'},
+      {d:'M 34,54 L 62,54 Q 68,44 64,28', label:'中橫折上'},
+      {d:'M 74,28 L 74,80', label:'右豎'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 左弧 ② 中橫折 ③ 右豎 ④ 頂橫線。'
+  },
+  'ङ': {
+    strokes: [
+      {d:'M 28,36 Q 20,52 28,66 Q 36,78 50,78 Q 64,78 72,66', label:'下半弧'},
+      {d:'M 72,66 Q 80,52 72,38 Q 64,28 50,30 Q 36,30 28,36', label:'上半弧（閉合主體）'},
+      {d:'M 76,35 Q 82,30 80,40', label:'右側小鉤'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 下半弧 ② 上半弧閉合 ③ 右側小鉤 ④ 頂橫線。'
+  },
+  'च': {
+    strokes: [
+      {d:'M 36,28 C 22,36 16,54 22,70 C 27,80 38,82 50,76', label:'左弧主體'},
+      {d:'M 56,28 Q 74,42 70,62 Q 66,76 54,80', label:'右鉤弧'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 左弧 ② 右鉤弧 ③ 頂橫線。字形與क相似，頂線更連貫。'
+  },
+  'छ': {
+    strokes: [
+      {d:'M 22,28 Q 50,18 78,28', label:'上拱弧'},
+      {d:'M 22,28 Q 14,46 20,64 Q 26,78 42,80', label:'左腿弧'},
+      {d:'M 62,42 Q 76,58 70,74 Q 64,82 52,82', label:'右弧'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 上拱 ② 左腿 ③ 右弧 ④ 頂橫線。'
+  },
+  'ज': {
+    strokes: [
+      {d:'M 58,28 Q 78,40 74,60 Q 70,78 52,82 Q 34,82 26,70 Q 20,56 30,46', label:'主弧（像數字3）'},
+      {d:'M 24,54 L 66,54', label:'中橫'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 主弧體 ② 中橫（特徵筆畫） ③ 頂橫線。'
+  },
+  'झ': {
+    strokes: [
+      {d:'M 40,28 Q 60,36 60,56 Q 58,74 42,80 Q 26,80 20,68', label:'左主弧'},
+      {d:'M 22,52 L 60,52', label:'中橫'},
+      {d:'M 68,28 Q 80,42 76,62 Q 72,80 60,82', label:'右延伸弧'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 左主弧 ② 中橫 ③ 右延伸弧 ④ 頂橫線。'
+  },
+  'ञ': {
+    strokes: [
+      {d:'M 24,32 Q 22,50 32,62 Q 42,70 52,64 Q 58,56 54,44 Q 48,32 36,28 Q 26,26 24,32', label:'左環弧'},
+      {d:'M 54,30 Q 66,42 64,58 Q 60,72 50,74', label:'右弧'},
+      {d:'M 64,34 Q 74,28 76,38', label:'右上標記'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 左環弧 ② 右弧 ③ 右上標記 ④ 頂橫線。ञ字形較複雜。'
+  },
+  'ट': {
+    strokes: [
+      {d:'M 62,32 Q 80,44 78,62 Q 74,80 54,82 Q 34,82 24,68 Q 16,52 24,38 Q 34,26 52,28 Q 60,30 64,36', label:'大圓弧（順時針接近封閉）'},
+      {d:'M 64,36 Q 70,28 66,22', label:'頂右內鉤（封閉特徵）'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 大圓弧 ② 頂右內鉤（ट的特徵） ③ 頂橫線。'
+  },
+  'ठ': {
+    strokes: [
+      {d:'M 20,32 Q 50,20 80,32', label:'上拱弧'},
+      {d:'M 50,32 L 50,82', label:'中豎'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 上拱弧 ② 中豎 ③ 頂橫線。'
+  },
+  'ड': {
+    strokes: [
+      {d:'M 58,28 Q 78,38 78,58 Q 78,80 56,82 Q 34,82 24,66 Q 16,50 24,36 Q 34,24 54,26', label:'圓弧主體'},
+      {d:'M 74,28 L 74,82', label:'右豎'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 圓弧 ② 右豎 ③ 頂橫線。'
+  },
+  'ढ': {
+    strokes: [
+      {d:'M 54,28 Q 72,38 72,58 Q 70,78 50,82 Q 32,82 22,66 Q 14,50 22,36 Q 32,24 50,26', label:'圓弧主體'},
+      {d:'M 64,22 Q 72,14 76,22', label:'頂右鉤（附加特徵）'},
+      {d:'M 74,28 L 74,82', label:'右豎'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 圓弧 ② 頂右鉤 ③ 右豎 ④ 頂橫線。ढ比ड多頂右鉤。'
+  },
+  'ण': {
+    strokes: [
+      {d:'M 52,30 Q 76,30 78,54 Q 78,76 56,80 Q 36,80 24,64 Q 16,48 24,36 Q 34,24 54,26', label:'外圓弧'},
+      {d:'M 42,44 Q 50,38 58,44 Q 62,52 56,60 Q 48,64 42,58 Q 38,52 42,44', label:'內小環（特徵）'},
+      {d:'M 74,28 L 74,82', label:'右豎'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 外圓弧 ② 內小環（ण特徵） ③ 右豎 ④ 頂橫線。'
+  },
+  'त': {
+    strokes: [
+      {d:'M 30,28 Q 18,40 18,58 Q 18,76 32,80 Q 44,82 52,74', label:'左弧'},
+      {d:'M 54,28 Q 72,42 68,64 Q 64,78 52,82', label:'右弧'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 左弧 ② 右弧 ③ 頂橫線。'
+  },
+  'थ': {
+    strokes: [
+      {d:'M 26,32 Q 18,50 22,66 Q 28,80 44,80', label:'左弧'},
+      {d:'M 28,56 L 72,56 Q 80,52 76,30', label:'中橫折上'},
+      {d:'M 28,22 L 72,22', label:'★ 短頂橫線（最後）— थ的頂線較短'},
+    ],
+    note:'① 左弧 ② 中橫折上 ③ 短頂橫線。※ थ的頂橫線較短，非全寬。'
+  },
+  'द': {
+    strokes: [
+      {d:'M 40,28 Q 70,28 74,48 Q 76,66 58,76 Q 42,82 30,74 Q 18,64 22,46 Q 26,30 40,28', label:'大弧形主體（梯形輪廓）'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 主體大弧（द是筆畫較少的字母） ② 頂橫線。'
+  },
+  'ध': {
+    strokes: [
+      {d:'M 32,30 Q 18,42 18,60 Q 18,78 34,82', label:'左弧'},
+      {d:'M 40,30 Q 70,30 72,50 Q 74,68 58,76 Q 44,80 36,72', label:'右上弧'},
+      {d:'M 30,22 L 68,22', label:'★ 短頂橫線（最後）— ध的頂線較短'},
+    ],
+    note:'① 左弧 ② 右上弧 ③ 短頂橫線。※ ध的頂橫線較短。'
+  },
+  'न': {
+    strokes: [
+      {d:'M 28,28 Q 16,44 20,62 Q 26,78 42,80 Q 54,80 58,70', label:'左弧'},
+      {d:'M 74,28 L 74,82', label:'右豎'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 左弧 ② 右豎 ③ 頂橫線。'
+  },
+  'प': {
+    strokes: [
+      {d:'M 28,28 Q 16,42 18,60 Q 20,76 36,80 Q 48,82 54,72', label:'左弧'},
+      {d:'M 56,28 Q 76,40 74,60 Q 70,78 54,82', label:'右弧'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 左弧 ② 右弧 ③ 頂橫線。'
+  },
+  'फ': {
+    strokes: [
+      {d:'M 30,30 Q 16,46 18,64 Q 22,80 38,80 Q 50,80 56,70', label:'左主弧'},
+      {d:'M 46,38 Q 54,30 64,38 Q 70,46 64,54 Q 56,60 46,54 Q 40,46 46,38', label:'內圓環（फ特徵）'},
+      {d:'M 74,28 L 74,82', label:'右豎'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 左主弧 ② 內圓環（फ的特徵） ③ 右豎 ④ 頂橫線。'
+  },
+  'ब': {
+    strokes: [
+      {d:'M 40,28 L 40,82', label:'左豎'},
+      {d:'M 40,28 Q 74,28 74,54 Q 74,80 40,80', label:'右大弧'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 左豎 ② 右大弧 ③ 頂橫線。'
+  },
+  'भ': {
+    strokes: [
+      {d:'M 38,30 L 38,82', label:'左豎'},
+      {d:'M 38,30 Q 66,30 68,50 Q 68,66 38,66', label:'上右半框'},
+      {d:'M 38,66 Q 70,70 72,80 Q 68,86 56,84', label:'下右延伸弧'},
+      {d:'M 26,22 L 68,22', label:'★ 短頂橫線（最後）— भ的頂線較短'},
+    ],
+    note:'① 左豎 ② 上右半框 ③ 下右延伸 ④ 短頂橫線。※ भ頂線較短。'
+  },
+  'म': {
+    strokes: [
+      {d:'M 22,28 Q 12,46 18,64 Q 24,80 38,80 Q 48,78 52,68', label:'左弧'},
+      {d:'M 52,28 Q 58,42 58,56 Q 58,70 68,78 Q 76,84 84,78', label:'右弧'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 左弧 ② 右弧（म有雙弧結構） ③ 頂橫線。'
+  },
+  'य': {
+    strokes: [
+      {d:'M 26,28 Q 14,42 16,60 Q 18,76 32,80 Q 44,82 54,74 Q 62,64 58,52', label:'左主弧'},
+      {d:'M 74,28 L 74,82', label:'右豎'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 左主弧 ② 右豎 ③ 頂橫線。'
+  },
+  'र': {
+    strokes: [
+      {d:'M 20,28 Q 50,30 70,44 Q 76,54 66,62', label:'小鉤弧主體'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'र是最簡單的輔音，只需2筆：① 小鉤弧 ② 頂橫線。'
+  },
+  'ल': {
+    strokes: [
+      {d:'M 30,28 Q 16,42 18,60 Q 22,76 38,80 Q 50,82 56,72', label:'主弧'},
+      {d:'M 56,72 Q 68,78 68,86', label:'右下鉤（ल特徵）'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 主弧 ② 右下鉤 ③ 頂橫線。右下鉤是ल的辨識特徵。'
+  },
+  'व': {
+    strokes: [
+      {d:'M 26,28 Q 14,44 18,62 Q 22,78 38,80 Q 50,80 54,70', label:'左主弧'},
+      {d:'M 54,28 Q 76,36 76,58 Q 74,78 58,82', label:'右弧'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 左主弧 ② 右弧 ③ 頂橫線。'
+  },
+  'श': {
+    strokes: [
+      {d:'M 26,30 Q 14,46 18,64 Q 22,78 38,80 Q 50,78 54,68', label:'左弧'},
+      {d:'M 50,30 Q 68,42 66,62 Q 62,78 48,80', label:'右弧'},
+      {d:'M 62,24 Q 70,18 72,28', label:'右上小鉤（श特徵）'},
+      {d:'M 26,22 L 70,22', label:'★ 短頂橫線（最後）— श的頂線較短'},
+    ],
+    note:'① 左弧 ② 右弧 ③ 右上小鉤 ④ 短頂橫線。※ श頂線較短，右上有小鉤。'
+  },
+  'ष': {
+    strokes: [
+      {d:'M 32,30 Q 16,46 18,64 Q 22,80 40,82', label:'左弧'},
+      {d:'M 52,30 Q 74,38 74,60 Q 72,78 56,82', label:'右弧'},
+      {d:'M 40,82 Q 46,88 52,82 Q 54,76 52,70', label:'底部叉形（ष特徵）'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 左弧 ② 右弧 ③ 底叉形（ष特徵） ④ 頂橫線。'
+  },
+  'स': {
+    strokes: [
+      {d:'M 24,32 Q 50,22 76,32 Q 82,42 74,50', label:'上弧（像數字3上半）'},
+      {d:'M 24,54 Q 18,64 24,74 Q 32,82 50,82 Q 68,80 74,70', label:'下弧（像數字3下半）'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 上弧 ② 下弧（整體像數字3） ③ 頂橫線。'
+  },
+  'ह': {
+    strokes: [
+      {d:'M 24,30 Q 50,20 72,32 Q 78,44 68,54 Q 58,62 48,58', label:'上弧'},
+      {d:'M 40,54 Q 22,62 20,74 Q 20,84 36,84 Q 50,82 52,70', label:'左下環弧（ह特徵）'},
+      {d:'M 70,28 L 70,80', label:'右豎'},
+      {d:'M 14,22 L 86,22', label:'★ 頂橫線（最後）'},
+    ],
+    note:'① 上弧 ② 左下環弧（ह特徵） ③ 右豎 ④ 頂橫線。'
+  },
 };
 
 const CONJUNCTS = {
-  k: [{deva:'क्क',comp:'k+k'},{deva:'क्त',comp:'k+t'},{deva:'क्ष',comp:'k+ṣ'},{deva:'क्र',comp:'k+r'},{deva:'क्व',comp:'k+v'},{deva:'क्ल',comp:'k+l'}],
-  t: [{deva:'त्त',comp:'t+t'},{deva:'त्र',comp:'t+r'},{deva:'त्व',comp:'t+v'},{deva:'त्न',comp:'t+n'},{deva:'त्म',comp:'t+m'},{deva:'स्त',comp:'s+t'}],
-  n: [{deva:'न्त',comp:'n+t'},{deva:'न्द',comp:'n+d'},{deva:'न्न',comp:'n+n'},{deva:'न्म',comp:'n+m'},{deva:'न्व',comp:'n+v'},{deva:'न्ध',comp:'n+dh'}],
-  special: [{deva:'ज्ञ',comp:'j+ñ'},{deva:'श्र',comp:'ś+r'},{deva:'द्ध',comp:'d+dh'},{deva:'द्ब',comp:'d+b'},{deva:'ह्म',comp:'h+m'},{deva:'ल्ल',comp:'l+l'},{deva:'ट्ट',comp:'ṭ+ṭ'},{deva:'ण्ण',comp:'ṇ+ṇ'}],
+  k:[{deva:'क्क',comp:'k+k'},{deva:'क्त',comp:'k+t'},{deva:'क्ष',comp:'k+ṣ'},{deva:'क्र',comp:'k+r'},{deva:'क्व',comp:'k+v'},{deva:'क्ल',comp:'k+l'}],
+  t:[{deva:'त्त',comp:'t+t'},{deva:'त्र',comp:'t+r'},{deva:'त्व',comp:'t+v'},{deva:'त्न',comp:'t+n'},{deva:'त्म',comp:'t+m'},{deva:'स्त',comp:'s+t'}],
+  n:[{deva:'न्त',comp:'n+t'},{deva:'न्द',comp:'n+d'},{deva:'न्न',comp:'n+n'},{deva:'न्म',comp:'n+m'},{deva:'न्व',comp:'n+v'},{deva:'न्ध',comp:'n+dh'}],
+  special:[{deva:'ज्ञ',comp:'j+ñ'},{deva:'श्र',comp:'ś+r'},{deva:'द्ध',comp:'d+dh'},{deva:'द्ब',comp:'d+b'},{deva:'ह्म',comp:'h+m'},{deva:'ल्ल',comp:'l+l'},{deva:'ट्ट',comp:'ṭ+ṭ'},{deva:'ण्ण',comp:'ṇ+ṇ'}],
 };
 
+// ═══════════════════════════════════════════
+// UI HELPERS
+// ═══════════════════════════════════════════
 function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.tabs button').forEach(b => {
+  document.querySelectorAll('.tabs button').forEach(b=>{
     b.classList.toggle('active', b.getAttribute('onclick').includes(`'${id}'`));
   });
 }
 
+function getPathEnd(d) {
+  const nums = d.match(/[\d.]+/g);
+  if (!nums||nums.length<2) return {x:50,y:50};
+  return {x:parseFloat(nums[nums.length-2]), y:parseFloat(nums[nums.length-1])};
+}
+
+function getPathStart(d) {
+  const m = d.match(/M\s*([\d.]+)[,\s]([\d.]+)/);
+  if (!m) return {x:50,y:50};
+  return {x:parseFloat(m[1]), y:parseFloat(m[2])};
+}
+
+const STROKE_COLORS = ['#e74c3c','#2980b9','#27ae60','#8e44ad','#e67e22'];
+
+// ═══════════════════════════════════════════
+// CHART
+// ═══════════════════════════════════════════
 function buildGrids() {
-  const groupMap = { ka:'grid-ka', ca:'grid-ca', 'ta-retro':'grid-ta-retro', ta:'grid-ta', pa:'grid-pa', semi:'grid-semi', sibilant:'grid-sibilant' };
-  Object.values(groupMap).forEach(id => { document.getElementById(id).innerHTML = ''; });
-  CONSONANTS.forEach(c => {
+  const groupMap = {ka:'grid-ka',ca:'grid-ca','ta-retro':'grid-ta-retro',ta:'grid-ta',pa:'grid-pa',semi:'grid-semi',sibilant:'grid-sibilant'};
+  Object.values(groupMap).forEach(id=>{document.getElementById(id).innerHTML='';});
+  CONSONANTS.forEach(c=>{
     const el = document.createElement('div');
     el.className = 'varna-card';
     el.innerHTML = `<div class="varna-deva">${c.deva}</div><div class="varna-roman">${c.roman}</div><div class="varna-iast">IAST: ${c.iast}</div>`;
-    el.onclick = () => selectChar(c, el);
-    const gridId = groupMap[c.group];
-    if (gridId) document.getElementById(gridId).appendChild(el);
+    el.onclick = ()=>selectChar(c,el);
+    const gid = groupMap[c.group];
+    if (gid) document.getElementById(gid).appendChild(el);
   });
 }
 
 function selectChar(c, el) {
-  document.querySelectorAll('.varna-card').forEach(x => x.classList.remove('selected'));
+  document.querySelectorAll('.varna-card').forEach(x=>x.classList.remove('selected'));
   el.classList.add('selected');
-  const detail = document.getElementById('char-detail');
   const sd = STROKE_DATA[c.deva];
+  const detail = document.getElementById('char-detail');
   detail.style.display = 'block';
-  document.getElementById('detail-title').textContent = `${c.deva} — ${c.roman} (${c.iast})`;
+  document.getElementById('detail-title').textContent = `${c.deva} — ${c.roman} (IAST: ${c.iast})`;
   document.getElementById('detail-body').innerHTML = `
     <table style="width:100%;font-size:.9rem;border-collapse:collapse;">
-      <tr><td style="padding:.3rem .6rem;color:var(--muted);width:120px;">發音部位</td><td style="padding:.3rem .6rem;">${c.place}</td></tr>
+      <tr><td style="padding:.3rem .6rem;color:var(--muted);width:100px;">發音部位</td><td style="padding:.3rem .6rem;">${c.place}</td></tr>
       <tr style="background:#fdf0d8"><td style="padding:.3rem .6rem;color:var(--muted);">發音方式</td><td style="padding:.3rem .6rem;">${c.manner}</td></tr>
-      <tr><td style="padding:.3rem .6rem;color:var(--muted);">Unicode</td><td style="padding:.3rem .6rem;">${c.unicode}</td></tr>
-      <tr style="background:#fdf0d8"><td style="padding:.3rem .6rem;color:var(--muted);">IAST</td><td style="padding:.3rem .6rem;">${c.iast}</td></tr>
-      ${sd ? `<tr><td style="padding:.3rem .6rem;color:var(--muted);">筆順提示</td><td style="padding:.3rem .6rem;">${sd.note}</td></tr>` : ''}
+      <tr><td style="padding:.3rem .6rem;color:var(--muted);">Unicode</td><td style="padding:.3rem .6rem;font-family:monospace;">${c.unicode}</td></tr>
+      ${sd?`<tr style="background:#fdf0d8"><td style="padding:.3rem .6rem;color:var(--muted);">筆順說明</td><td style="padding:.3rem .6rem;">${sd.note}</td></tr>`:''}
     </table>
-    ${sd ? buildMiniStrokeSteps(c.deva, sd) : ''}`;
-  detail.scrollIntoView({ behavior:'smooth', block:'nearest' });
+    ${sd?buildMiniSteps(c.deva,sd):''}`;
+  detail.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
-function buildMiniStrokeSteps(deva, sd) {
-  const colors = ['#e74c3c','#2980b9','#27ae60','#8e44ad','#e67e22'];
+function buildMiniSteps(deva, sd) {
   let html = '<div style="margin-top:.8rem;"><strong style="font-size:.85rem;">筆順預覽：</strong><div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.4rem;">';
-  for (let i = 0; i < sd.strokes.length; i++) {
-    html += `<div style="text-align:center;"><svg width="70" height="70" viewBox="0 0 100 100" style="border:1px solid #d4a96a;border-radius:6px;background:#fff;display:block;"><text x="50" y="62" font-size="38" text-anchor="middle" fill="#e8d5b0" font-family="serif">${deva}</text>`;
-    for (let j = 0; j <= i; j++) {
-      html += `<path d="${sd.strokes[j].d}" stroke="${colors[j]}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
-      const end = getPathEnd(sd.strokes[j].d);
-      html += `<circle cx="${end.x}" cy="${end.y}" r="3" fill="${colors[j]}"/>`;
+  for (let i=0;i<sd.strokes.length;i++) {
+    html += `<div style="text-align:center;"><svg width="72" height="72" viewBox="0 0 100 100" style="border:1px solid #d4a96a;border-radius:6px;background:#fff;display:block;">`;
+    html += `<text x="50" y="65" font-size="42" text-anchor="middle" fill="#e8d5b0" font-family="serif">${deva}</text>`;
+    for (let j=0;j<=i;j++) {
+      const col = STROKE_COLORS[j];
+      const op = j<i?'0.45':'1';
+      html += `<path d="${sd.strokes[j].d}" stroke="${col}" stroke-width="${j===i?3.5:2}" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="${op}"/>`;
+      const s = getPathStart(sd.strokes[j].d);
+      html += `<circle cx="${s.x}" cy="${s.y}" r="3" fill="white" stroke="${col}" stroke-width="1.5" opacity="${op}"/>`;
+      const e = getPathEnd(sd.strokes[j].d);
+      html += `<circle cx="${e.x}" cy="${e.y}" r="${j===i?4:2.5}" fill="${col}" opacity="${op}"/>`;
     }
-    html += `</svg><div style="font-size:.65rem;color:var(--muted);">筆${i+1}: ${sd.strokes[i].label}</div></div>`;
+    html += `</svg><div style="font-size:.65rem;color:var(--muted);max-width:72px;">筆${i+1}</div></div>`;
   }
   html += '</div></div>';
   return html;
 }
 
-function getPathEnd(d) {
-  const nums = d.match(/[\d.]+/g);
-  if (!nums || nums.length < 2) return {x:50,y:50};
-  return { x: parseFloat(nums[nums.length-2]), y: parseFloat(nums[nums.length-1]) };
-}
-
+// ═══════════════════════════════════════════
+// STROKES SECTION
+// ═══════════════════════════════════════════
 let currentStrokeChar = null, animTimer = null;
 
 function buildStrokeSelector() {
-  const container = document.getElementById('stroke-selector');
-  container.innerHTML = '';
-  CONSONANTS.forEach(c => {
+  const c = document.getElementById('stroke-selector');
+  c.innerHTML = '';
+  CONSONANTS.forEach(ch=>{
     const btn = document.createElement('button');
-    btn.className = 'btn secondary';
-    btn.style.cssText = 'font-size:1.1rem;padding:.3rem .6rem;border-radius:6px;';
-    btn.textContent = c.deva; btn.title = c.roman;
-    btn.onclick = () => showStrokeOrder(c);
-    container.appendChild(btn);
+    btn.className='btn secondary';
+    btn.style.cssText='font-size:1.2rem;padding:.3rem .65rem;min-width:2.2rem;';
+    btn.textContent=ch.deva; btn.title=ch.roman;
+    btn.onclick=()=>showStrokeOrder(ch);
+    c.appendChild(btn);
   });
 }
 
-function showStrokeOrder(c) {
-  currentStrokeChar = c;
-  const sd = STROKE_DATA[c.deva];
-  document.getElementById('stroke-char-title').textContent = `${c.deva} — ${c.roman} | ${c.place}`;
+function showStrokeOrder(ch) {
+  currentStrokeChar = ch;
+  const sd = STROKE_DATA[ch.deva];
+  document.getElementById('stroke-char-title').textContent = `${ch.deva} — ${ch.roman} | ${ch.place}`;
   const container = document.getElementById('stroke-steps-container');
   container.innerHTML = '';
-  if (!sd) { container.innerHTML = '<div style="color:var(--muted);font-size:.9rem;">此字母暫無詳細筆順資料。</div>'; return; }
-  const colors = ['#e74c3c','#2980b9','#27ae60','#8e44ad','#e67e22'];
-  sd.strokes.forEach((stroke, i) => {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'stroke-step';
-    wrapper.innerHTML = `<span class="step-num">筆畫 ${i+1}：${stroke.label}</span>`;
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('width','100'); svg.setAttribute('height','100'); svg.setAttribute('viewBox','0 0 100 100');
+  if (!sd) { container.innerHTML='<div style="color:var(--muted);">暫無資料</div>'; return; }
+
+  sd.strokes.forEach((stroke,i)=>{
+    const wrap = document.createElement('div');
+    wrap.className='stroke-step';
+    const isLast = i===sd.strokes.length-1;
+    wrap.innerHTML=`<span class="step-num" style="color:${STROKE_COLORS[i]};">${isLast?'★ ':''}筆畫${i+1}：${stroke.label}</span>`;
+    const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('width','110'); svg.setAttribute('height','110'); svg.setAttribute('viewBox','0 0 100 100');
     const ghost = document.createElementNS('http://www.w3.org/2000/svg','text');
-    ghost.setAttribute('x','50'); ghost.setAttribute('y','65'); ghost.setAttribute('font-size','45');
+    ghost.setAttribute('x','50'); ghost.setAttribute('y','65'); ghost.setAttribute('font-size','42');
     ghost.setAttribute('text-anchor','middle'); ghost.setAttribute('fill','#e8d5b0'); ghost.setAttribute('font-family','serif');
-    ghost.textContent = c.deva; svg.appendChild(ghost);
-    for (let j = 0; j <= i; j++) {
-      const path = document.createElementNS('http://www.w3.org/2000/svg','path');
-      path.setAttribute('d', sd.strokes[j].d); path.setAttribute('stroke', colors[j]);
-      path.setAttribute('stroke-width', j===i ? '3.5' : '2'); path.setAttribute('fill','none');
+    ghost.textContent=ch.deva; svg.appendChild(ghost);
+    // Guide line for shirorékha position
+    const gl = document.createElementNS('http://www.w3.org/2000/svg','line');
+    gl.setAttribute('x1','10');gl.setAttribute('y1','22');gl.setAttribute('x2','90');gl.setAttribute('y2','22');
+    gl.setAttribute('stroke','#e8d5b0');gl.setAttribute('stroke-width','0.5');gl.setAttribute('stroke-dasharray','2,2');
+    svg.appendChild(gl);
+    for (let j=0;j<=i;j++) {
+      const col=STROKE_COLORS[j], op=j<i?0.4:1, sw=j===i?3.5:2;
+      const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+      path.setAttribute('d',sd.strokes[j].d); path.setAttribute('stroke',col);
+      path.setAttribute('stroke-width',sw); path.setAttribute('fill','none');
       path.setAttribute('stroke-linecap','round'); path.setAttribute('stroke-linejoin','round');
-      if (j < i) path.setAttribute('opacity','0.5');
-      svg.appendChild(path);
-      const end = getPathEnd(sd.strokes[j].d);
-      const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
-      dot.setAttribute('cx',end.x); dot.setAttribute('cy',end.y);
-      dot.setAttribute('r', j===i ? '4' : '2.5'); dot.setAttribute('fill',colors[j]);
-      if (j < i) dot.setAttribute('opacity','0.5');
-      svg.appendChild(dot);
+      path.setAttribute('opacity',op); svg.appendChild(path);
+      const s=getPathStart(sd.strokes[j].d);
+      const sdot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      sdot.setAttribute('cx',s.x);sdot.setAttribute('cy',s.y);sdot.setAttribute('r','3');
+      sdot.setAttribute('fill','white');sdot.setAttribute('stroke',col);sdot.setAttribute('stroke-width','1.5');
+      sdot.setAttribute('opacity',op);svg.appendChild(sdot);
+      const e=getPathEnd(sd.strokes[j].d);
+      const edot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      edot.setAttribute('cx',e.x);edot.setAttribute('cy',e.y);edot.setAttribute('r',j===i?4:2.5);
+      edot.setAttribute('fill',col);edot.setAttribute('opacity',op);svg.appendChild(edot);
     }
-    wrapper.appendChild(svg); container.appendChild(wrapper);
+    wrap.appendChild(svg); container.appendChild(wrap);
   });
+
+  const note=document.createElement('div');
+  note.style.cssText='font-size:.85rem;color:var(--muted);margin-top:.8rem;max-width:600px;line-height:1.6;padding:.6rem;background:#fdf0d8;border-radius:6px;';
+  note.innerHTML=`<strong>筆順說明：</strong> ${sd.note}`;
+  container.after(note);
   resetStrokeAnim();
 }
 
 function playStrokeAnim() {
   if (!currentStrokeChar) return;
-  const sd = STROKE_DATA[currentStrokeChar.deva];
+  const sd=STROKE_DATA[currentStrokeChar.deva];
   if (!sd) return;
   resetStrokeAnim();
-  const svg = document.getElementById('stroke-anim-svg');
-  const label = document.getElementById('anim-label');
-  const speed = parseInt(document.getElementById('anim-speed').value);
-  const colors = ['#e74c3c','#2980b9','#27ae60','#8e44ad','#e67e22'];
-  let step = 0;
+  const svg=document.getElementById('stroke-anim-svg');
+  const label=document.getElementById('anim-label');
+  const speed=parseInt(document.getElementById('anim-speed').value);
+  let step=0;
   function drawStep() {
-    if (step >= sd.strokes.length) { label.textContent = '完成！'; return; }
-    label.textContent = `筆畫 ${step+1}/${sd.strokes.length}：${sd.strokes[step].label}`;
-    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
-    path.setAttribute('d', sd.strokes[step].d); path.setAttribute('stroke', colors[step]);
-    path.setAttribute('stroke-width','4'); path.setAttribute('fill','none');
+    if (step>=sd.strokes.length) { label.textContent='完成！所有筆畫已畫完。'; return; }
+    const col=STROKE_COLORS[step];
+    const isLast=step===sd.strokes.length-1;
+    label.textContent=`${isLast?'★ ':''}筆畫${step+1}/${sd.strokes.length}：${sd.strokes[step].label}`;
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',sd.strokes[step].d); path.setAttribute('stroke',col);
+    path.setAttribute('stroke-width','4.5'); path.setAttribute('fill','none');
     path.setAttribute('stroke-linecap','round'); path.setAttribute('stroke-linejoin','round');
-    path.style.strokeDasharray = 80; path.style.strokeDashoffset = 80;
-    path.style.transition = `stroke-dashoffset ${speed*0.8}ms ease`;
+    path.style.strokeDasharray=120; path.style.strokeDashoffset=120;
+    path.style.transition=`stroke-dashoffset ${speed*0.85}ms ease`;
     svg.appendChild(path);
-    requestAnimationFrame(() => { path.style.strokeDashoffset = '0'; });
-    step++; animTimer = setTimeout(drawStep, speed);
+    requestAnimationFrame(()=>{path.style.strokeDashoffset='0';});
+    step++; animTimer=setTimeout(drawStep,speed);
   }
   drawStep();
 }
 
 function resetStrokeAnim() {
   if (animTimer) clearTimeout(animTimer);
-  const svg = document.getElementById('stroke-anim-svg');
-  svg.innerHTML = '';
-  document.getElementById('anim-label').textContent = '';
-  const ghost = document.createElementNS('http://www.w3.org/2000/svg','text');
-  ghost.setAttribute('x','50'); ghost.setAttribute('y','68'); ghost.setAttribute('font-size','52');
-  ghost.setAttribute('text-anchor','middle'); ghost.setAttribute('fill','#e8d5b0'); ghost.setAttribute('font-family','serif');
-  ghost.textContent = currentStrokeChar ? currentStrokeChar.deva : '?';
+  const svg=document.getElementById('stroke-anim-svg');
+  svg.innerHTML='';
+  document.getElementById('anim-label').textContent='';
+  const ghost=document.createElementNS('http://www.w3.org/2000/svg','text');
+  ghost.setAttribute('x','50');ghost.setAttribute('y','68');ghost.setAttribute('font-size','54');
+  ghost.setAttribute('text-anchor','middle');ghost.setAttribute('fill','#e8d5b0');ghost.setAttribute('font-family','serif');
+  ghost.textContent=currentStrokeChar?currentStrokeChar.deva:'?';
   svg.appendChild(ghost);
-  const line = document.createElementNS('http://www.w3.org/2000/svg','line');
-  line.setAttribute('x1','10'); line.setAttribute('y1','72'); line.setAttribute('x2','90'); line.setAttribute('y2','72');
-  line.setAttribute('stroke','#d4a96a'); line.setAttribute('stroke-width','1'); line.setAttribute('stroke-dasharray','3,3');
-  svg.appendChild(line);
+  const gl=document.createElementNS('http://www.w3.org/2000/svg','line');
+  gl.setAttribute('x1','10');gl.setAttribute('y1','22');gl.setAttribute('x2','90');gl.setAttribute('y2','22');
+  gl.setAttribute('stroke','#c0a870');gl.setAttribute('stroke-width','0.8');gl.setAttribute('stroke-dasharray','3,3');
+  svg.appendChild(gl);
 }
 
+// ═══════════════════════════════════════════
+// PRACTICE CANVAS
+// ═══════════════════════════════════════════
 let isDrawing=false, lastX=0, lastY=0, guideVisible=true;
-let currentPracticeChar = CONSONANTS[0];
+let currentPracticeChar=CONSONANTS[0];
 
 function initCanvas() {
-  const canvas = document.getElementById('practice-canvas');
-  const ctx = canvas.getContext('2d');
+  const canvas=document.getElementById('practice-canvas'), ctx=canvas.getContext('2d');
   drawGrid(); drawGuideOverlay();
   function getPos(e) {
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width/rect.width, scaleY = canvas.height/rect.height;
-    if (e.touches) return { x:(e.touches[0].clientX-rect.left)*scaleX, y:(e.touches[0].clientY-rect.top)*scaleY };
-    return { x:(e.clientX-rect.left)*scaleX, y:(e.clientY-rect.top)*scaleY };
+    const r=canvas.getBoundingClientRect(), sx=canvas.width/r.width, sy=canvas.height/r.height;
+    if (e.touches) return {x:(e.touches[0].clientX-r.left)*sx,y:(e.touches[0].clientY-r.top)*sy};
+    return {x:(e.clientX-r.left)*sx,y:(e.clientY-r.top)*sy};
   }
-  function startDraw(e) { e.preventDefault(); isDrawing=true; const p=getPos(e); lastX=p.x; lastY=p.y; ctx.beginPath(); ctx.moveTo(lastX,lastY); }
-  function draw(e) {
-    e.preventDefault(); if (!isDrawing) return;
-    const p=getPos(e);
+  function start(e){e.preventDefault();isDrawing=true;const p=getPos(e);lastX=p.x;lastY=p.y;ctx.beginPath();ctx.moveTo(lastX,lastY);}
+  function move(e){
+    e.preventDefault();if(!isDrawing)return;const p=getPos(e);
     ctx.lineWidth=parseInt(document.getElementById('pen-size').value);
     ctx.strokeStyle=document.getElementById('pen-color').value;
-    ctx.lineCap='round'; ctx.lineJoin='round';
-    ctx.lineTo(p.x,p.y); ctx.stroke(); ctx.beginPath(); ctx.moveTo(p.x,p.y);
-    lastX=p.x; lastY=p.y;
+    ctx.lineCap='round';ctx.lineJoin='round';
+    ctx.lineTo(p.x,p.y);ctx.stroke();ctx.beginPath();ctx.moveTo(p.x,p.y);lastX=p.x;lastY=p.y;
   }
-  function stopDraw() { isDrawing=false; ctx.beginPath(); }
-  canvas.addEventListener('mousedown',startDraw); canvas.addEventListener('mousemove',draw);
-  canvas.addEventListener('mouseup',stopDraw); canvas.addEventListener('mouseleave',stopDraw);
-  canvas.addEventListener('touchstart',startDraw,{passive:false}); canvas.addEventListener('touchmove',draw,{passive:false});
-  canvas.addEventListener('touchend',stopDraw);
+  function stop(){isDrawing=false;ctx.beginPath();}
+  canvas.addEventListener('mousedown',start);canvas.addEventListener('mousemove',move);
+  canvas.addEventListener('mouseup',stop);canvas.addEventListener('mouseleave',stop);
+  canvas.addEventListener('touchstart',start,{passive:false});canvas.addEventListener('touchmove',move,{passive:false});
+  canvas.addEventListener('touchend',stop);
 }
 
 function drawGrid() {
-  const canvas=document.getElementById('practice-canvas'), ctx=canvas.getContext('2d');
+  const canvas=document.getElementById('practice-canvas'),ctx=canvas.getContext('2d');
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle='#f8f4ed'; ctx.fillRect(0,0,canvas.width,canvas.height);
-  if (!document.getElementById('show-grid').checked) return;
-  const cellW=canvas.width/8, cellH=canvas.height;
-  for (let i=1;i<8;i++) { ctx.strokeStyle='#d4c4a0'; ctx.lineWidth=0.5; ctx.beginPath(); ctx.moveTo(i*cellW,0); ctx.lineTo(i*cellW,cellH); ctx.stroke(); }
-  for (let i=0;i<8;i++) {
-    const x=i*cellW;
-    ctx.strokeStyle='#c0a870'; ctx.lineWidth=1.2; ctx.setLineDash([4,4]);
-    ctx.beginPath(); ctx.moveTo(x+4,cellH*0.28); ctx.lineTo(x+cellW-4,cellH*0.28); ctx.stroke();
-    ctx.strokeStyle='#b09860'; ctx.lineWidth=0.8; ctx.setLineDash([6,3]);
-    ctx.beginPath(); ctx.moveTo(x+4,cellH*0.75); ctx.lineTo(x+cellW-4,cellH*0.75); ctx.stroke();
+  ctx.fillStyle='#f8f4ed';ctx.fillRect(0,0,canvas.width,canvas.height);
+  if(!document.getElementById('show-grid').checked)return;
+  const cw=canvas.width/8,ch=canvas.height;
+  for(let i=1;i<8;i++){ctx.strokeStyle='#d4c4a0';ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(i*cw,0);ctx.lineTo(i*cw,ch);ctx.stroke();}
+  for(let i=0;i<8;i++){
+    const x=i*cw;
+    ctx.strokeStyle='#c0a870';ctx.lineWidth=1.2;ctx.setLineDash([4,4]);
+    ctx.beginPath();ctx.moveTo(x+4,ch*0.28);ctx.lineTo(x+cw-4,ch*0.28);ctx.stroke();
+    ctx.strokeStyle='#b09860';ctx.lineWidth=0.8;ctx.setLineDash([6,3]);
+    ctx.beginPath();ctx.moveTo(x+4,ch*0.75);ctx.lineTo(x+cw-4,ch*0.75);ctx.stroke();
     ctx.setLineDash([]);
   }
 }
 
 function drawGuideOverlay() {
-  const overlay=document.getElementById('guide-overlay'), ctx=overlay.getContext('2d');
-  ctx.clearRect(0,0,overlay.width,overlay.height);
-  if (!guideVisible) return;
-  const cellW=overlay.width/8, fontSize=Math.min(cellW*0.75,overlay.height*0.6);
-  ctx.font=`${fontSize}px serif`; ctx.textAlign='center'; ctx.textBaseline='alphabetic';
+  const ov=document.getElementById('guide-overlay'),ctx=ov.getContext('2d');
+  ctx.clearRect(0,0,ov.width,ov.height);
+  if(!guideVisible)return;
+  const cw=ov.width/8,fs=Math.min(cw*0.75,ov.height*0.6);
+  ctx.font=`${fs}px serif`;ctx.textAlign='center';ctx.textBaseline='alphabetic';
   ctx.fillStyle='rgba(139,58,0,0.12)';
-  for (let i=0;i<8;i++) ctx.fillText(currentPracticeChar.deva, i*cellW+cellW/2, overlay.height*0.72);
+  for(let i=0;i<8;i++) ctx.fillText(currentPracticeChar.deva,i*cw+cw/2,ov.height*0.72);
 }
 
-function clearCanvas() { drawGrid(); drawGuideOverlay(); }
-function toggleGuide() { guideVisible=!guideVisible; drawGuideOverlay(); }
-function downloadCanvas() {
-  const canvas=document.getElementById('practice-canvas'), link=document.createElement('a');
-  link.download=`sanskrit-practice-${currentPracticeChar.roman}.png`; link.href=canvas.toDataURL(); link.click();
+function clearCanvas(){drawGrid();drawGuideOverlay();}
+function toggleGuide(){guideVisible=!guideVisible;drawGuideOverlay();}
+function downloadCanvas(){
+  const c=document.getElementById('practice-canvas'),a=document.createElement('a');
+  a.download=`practice-${currentPracticeChar.roman}.png`;a.href=c.toDataURL();a.click();
 }
 
 function buildPracticeSelector() {
-  const container=document.getElementById('practice-selector'); container.innerHTML='';
-  CONSONANTS.forEach(c => {
+  const c=document.getElementById('practice-selector');c.innerHTML='';
+  CONSONANTS.forEach(ch=>{
     const btn=document.createElement('button');
-    btn.className='btn secondary'; btn.style.cssText='font-size:1.1rem;padding:.25rem .55rem;border-radius:6px;';
-    btn.textContent=c.deva; btn.title=c.roman;
-    btn.onclick=()=>{ currentPracticeChar=c; document.getElementById('practice-ref-char').textContent=c.deva; document.getElementById('practice-ref-roman').textContent=c.roman; drawGuideOverlay(); };
-    container.appendChild(btn);
+    btn.className='btn secondary';btn.style.cssText='font-size:1.1rem;padding:.25rem .55rem;';
+    btn.textContent=ch.deva;btn.title=ch.roman;
+    btn.onclick=()=>{
+      currentPracticeChar=ch;
+      document.getElementById('practice-ref-char').textContent=ch.deva;
+      document.getElementById('practice-ref-roman').textContent=ch.roman;
+      drawGuideOverlay();
+    };
+    c.appendChild(btn);
   });
 }
 
-function generatePrintSheet() {
-  const count=parseInt(document.getElementById('grid-count').value), container=document.getElementById('print-sheet'), svgs=[];
-  for (let i=0;i<count;i++) {
-    svgs.push(`<svg width="60" height="70" viewBox="0 0 60 70" style="border:1px solid #c0a870;display:inline-block;margin:2px;background:#fff;"><line x1="4" y1="18" x2="56" y2="18" stroke="#c0a870" stroke-width="1" stroke-dasharray="3,2"/><line x1="4" y1="52" x2="56" y2="52" stroke="#b09860" stroke-width="0.8" stroke-dasharray="4,2"/><text x="30" y="52" font-size="32" text-anchor="middle" fill="rgba(139,58,0,0.1)" font-family="serif">${currentPracticeChar.deva}</text></svg>`);
-  }
-  container.innerHTML=`<div style="background:#fff;padding:.8rem;border:1px solid var(--border);border-radius:8px;"><div style="font-size:.85rem;color:var(--muted);margin-bottom:.5rem;">練習字母：${currentPracticeChar.deva} (${currentPracticeChar.roman}) — ${count} 格</div><div>${svgs.join('')}</div></div>`;
+function generatePrintSheet(){
+  const cnt=parseInt(document.getElementById('grid-count').value),c=document.getElementById('print-sheet'),s=[];
+  for(let i=0;i<cnt;i++) s.push(`<svg width="60" height="70" viewBox="0 0 60 70" style="border:1px solid #c0a870;display:inline-block;margin:2px;background:#fff;"><line x1="4" y1="18" x2="56" y2="18" stroke="#c0a870" stroke-width="1" stroke-dasharray="3,2"/><line x1="4" y1="52" x2="56" y2="52" stroke="#b09860" stroke-width="0.8" stroke-dasharray="4,2"/><text x="30" y="52" font-size="32" text-anchor="middle" fill="rgba(139,58,0,0.1)" font-family="serif">${currentPracticeChar.deva}</text></svg>`);
+  c.innerHTML=`<div style="background:#fff;padding:.8rem;border:1px solid var(--border);border-radius:8px;"><div style="font-size:.85rem;color:var(--muted);margin-bottom:.5rem;">練習：${currentPracticeChar.deva} (${currentPracticeChar.roman}) — ${cnt}格</div><div>${s.join('')}</div></div>`;
 }
 
 document.getElementById('grid-count').addEventListener('input',function(){document.getElementById('grid-count-val').textContent=this.value;});
 
-function buildHalanta() {
-  const container=document.getElementById('halanta-list'); container.innerHTML='';
+// ═══════════════════════════════════════════
+// HALANTA
+// ═══════════════════════════════════════════
+function buildHalanta(){
+  const c=document.getElementById('halanta-list');c.innerHTML='';
   const groups=[
-    {label:'Ka-varga', chars:CONSONANTS.filter(c=>c.group==='ka')},
-    {label:'Ca-varga', chars:CONSONANTS.filter(c=>c.group==='ca')},
-    {label:'Ṭa-varga', chars:CONSONANTS.filter(c=>c.group==='ta-retro')},
-    {label:'Ta-varga', chars:CONSONANTS.filter(c=>c.group==='ta')},
-    {label:'Pa-varga', chars:CONSONANTS.filter(c=>c.group==='pa')},
-    {label:'Antaḥstha', chars:CONSONANTS.filter(c=>c.group==='semi')},
-    {label:'Ūṣman', chars:CONSONANTS.filter(c=>c.group==='sibilant')},
+    {label:'Ka-varga',chars:CONSONANTS.filter(x=>x.group==='ka')},
+    {label:'Ca-varga',chars:CONSONANTS.filter(x=>x.group==='ca')},
+    {label:'Ṭa-varga',chars:CONSONANTS.filter(x=>x.group==='ta-retro')},
+    {label:'Ta-varga',chars:CONSONANTS.filter(x=>x.group==='ta')},
+    {label:'Pa-varga',chars:CONSONANTS.filter(x=>x.group==='pa')},
+    {label:'Antaḥstha',chars:CONSONANTS.filter(x=>x.group==='semi')},
+    {label:'Ūṣman',chars:CONSONANTS.filter(x=>x.group==='sibilant')},
   ];
-  groups.forEach(g => {
-    const label=document.createElement('div'); label.className='group-label'; label.textContent=g.label; container.appendChild(label);
-    g.chars.forEach(c => {
-      const row=document.createElement('div'); row.className='halant-row';
-      row.innerHTML=`<span class="halant-char" title="${c.roman}">${c.deva}</span><span class="halant-arrow">+</span><span class="halant-virама">्</span><span class="halant-arrow">=</span><span class="halant-char">${c.deva}्</span><span style="font-size:.85rem;color:var(--muted);margin-left:.5rem;">${c.iast}् (純 ${c.iast} 音)</span>`;
-      container.appendChild(row);
+  groups.forEach(g=>{
+    const lbl=document.createElement('div');lbl.className='group-label';lbl.textContent=g.label;c.appendChild(lbl);
+    g.chars.forEach(ch=>{
+      const row=document.createElement('div');row.className='halant-row';
+      row.innerHTML=`<span class="halant-char">${ch.deva}</span><span class="halant-arrow">+</span><span class="halant-char" style="color:var(--accent2);">्</span><span class="halant-arrow">=</span><span class="halant-char">${ch.deva}्</span><span style="font-size:.85rem;color:var(--muted);margin-left:.5rem;">${ch.iast}् (純${ch.iast}音)</span>`;
+      c.appendChild(row);
     });
   });
 }
 
-function buildConjuncts() {
-  function fillGrid(id, list) {
-    const el=document.getElementById(id); el.innerHTML='';
-    list.forEach(item => { const div=document.createElement('div'); div.className='conjunct-card'; div.innerHTML=`<div class="conjunct-deva">${item.deva}</div><div class="conjunct-comp">${item.comp}</div>`; el.appendChild(div); });
+// ═══════════════════════════════════════════
+// CONJUNCTS
+// ═══════════════════════════════════════════
+function buildConjuncts(){
+  function fill(id,list){
+    const el=document.getElementById(id);el.innerHTML='';
+    list.forEach(item=>{
+      const d=document.createElement('div');d.className='conjunct-card';
+      d.innerHTML=`<div class="conjunct-deva">${item.deva}</div><div class="conjunct-comp">${item.comp}</div>`;
+      el.appendChild(d);
+    });
   }
-  fillGrid('conj-k',CONJUNCTS.k); fillGrid('conj-t',CONJUNCTS.t); fillGrid('conj-n',CONJUNCTS.n); fillGrid('conj-special',CONJUNCTS.special);
+  fill('conj-k',CONJUNCTS.k);fill('conj-t',CONJUNCTS.t);fill('conj-n',CONJUNCTS.n);fill('conj-special',CONJUNCTS.special);
 }
 
-let quizScore=0, quizTotal=0, quizCurrent=null;
-function buildQuiz() { nextQuiz(); }
-function nextQuiz() {
+// ═══════════════════════════════════════════
+// QUIZ
+// ═══════════════════════════════════════════
+let quizScore=0,quizTotal=0,quizCurrent=null;
+function nextQuiz(){
   const mode=document.getElementById('quiz-mode').value;
   document.getElementById('quiz-feedback').textContent='';
   document.querySelectorAll('#quiz-options button').forEach(b=>{b.classList.remove('correct','wrong');b.disabled=false;});
   quizCurrent=CONSONANTS[Math.floor(Math.random()*CONSONANTS.length)];
   const wrong=CONSONANTS.filter(c=>c.deva!==quizCurrent.deva).sort(()=>Math.random()-.5).slice(0,3);
-  const options=[...wrong,quizCurrent].sort(()=>Math.random()-.5);
-  if (mode==='deva2roman') {
-    document.getElementById('quiz-char').textContent=quizCurrent.deva;
+  const opts=[...wrong,quizCurrent].sort(()=>Math.random()-.5);
+  if(mode==='deva2roman'){
     document.getElementById('quiz-char').style.fontSize='5rem';
-    const btns=document.getElementById('quiz-options'); btns.innerHTML='';
-    options.forEach(opt=>{ const btn=document.createElement('button'); btn.textContent=opt.roman; btn.onclick=()=>checkAnswer(btn,opt.roman===quizCurrent.roman,options); btns.appendChild(btn); });
+    document.getElementById('quiz-char').textContent=quizCurrent.deva;
+    const b=document.getElementById('quiz-options');b.innerHTML='';
+    opts.forEach(o=>{const btn=document.createElement('button');btn.textContent=o.roman;btn.onclick=()=>checkAns(btn,o.roman===quizCurrent.roman);b.appendChild(btn);});
   } else {
     document.getElementById('quiz-char').style.fontSize='1.8rem';
     document.getElementById('quiz-char').textContent=quizCurrent.roman;
-    const btns=document.getElementById('quiz-options'); btns.innerHTML='';
-    options.forEach(opt=>{ const btn=document.createElement('button'); btn.style.fontSize='1.8rem'; btn.textContent=opt.deva; btn.onclick=()=>checkAnswer(btn,opt.deva===quizCurrent.deva,options); btns.appendChild(btn); });
+    const b=document.getElementById('quiz-options');b.innerHTML='';
+    opts.forEach(o=>{const btn=document.createElement('button');btn.style.fontSize='1.8rem';btn.textContent=o.deva;btn.onclick=()=>checkAns(btn,o.deva===quizCurrent.deva);b.appendChild(btn);});
   }
 }
-function checkAnswer(btn,correct,options) {
+function checkAns(btn,correct){
   quizTotal++;
-  if (correct) {
-    btn.classList.add('correct');
-    document.getElementById('quiz-feedback').innerHTML=`<span style="color:#2ecc71;font-weight:bold;">✓ 正確！</span> ${quizCurrent.deva} = ${quizCurrent.roman} (${quizCurrent.place})`;
-    quizScore++;
-  } else {
+  if(correct){btn.classList.add('correct');quizScore++;document.getElementById('quiz-feedback').innerHTML=`<span style="color:#2ecc71;font-weight:bold;">✓ 正確！</span> ${quizCurrent.deva} = ${quizCurrent.roman}`;}
+  else{
     btn.classList.add('wrong');
     const mode=document.getElementById('quiz-mode').value;
-    document.querySelectorAll('#quiz-options button').forEach(b=>{ if ((mode==='deva2roman'&&b.textContent===quizCurrent.roman)||(mode==='roman2deva'&&b.textContent===quizCurrent.deva)) b.classList.add('correct'); });
-    document.getElementById('quiz-feedback').innerHTML=`<span style="color:#e74c3c;font-weight:bold;">✗ 錯誤</span>，正確答案：${quizCurrent.deva} = ${quizCurrent.roman}`;
+    document.querySelectorAll('#quiz-options button').forEach(b=>{if((mode==='deva2roman'&&b.textContent===quizCurrent.roman)||(mode==='roman2deva'&&b.textContent===quizCurrent.deva))b.classList.add('correct');});
+    document.getElementById('quiz-feedback').innerHTML=`<span style="color:#e74c3c;font-weight:bold;">✗ 錯誤</span>，正確：${quizCurrent.deva} = ${quizCurrent.roman}`;
   }
   document.querySelectorAll('#quiz-options button').forEach(b=>b.disabled=true);
   document.getElementById('quiz-score').textContent=`得分：${quizScore} / ${quizTotal} (${Math.round(quizScore/quizTotal*100)||0}%)`;
 }
-function resetQuiz() { quizScore=0; quizTotal=0; document.getElementById('quiz-score').textContent='得分：0 / 0'; nextQuiz(); }
+function resetQuiz(){quizScore=0;quizTotal=0;document.getElementById('quiz-score').textContent='得分：0 / 0';nextQuiz();}
 
-function buildRefTable() {
-  const tbody=document.getElementById('ref-tbody'); tbody.innerHTML='';
-  CONSONANTS.forEach(c=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td><span class="deva-big">${c.deva}</span></td><td>${c.iast}</td><td>${c.roman}</td><td>${c.place}</td><td>${c.manner}</td><td style="font-family:monospace;font-size:.85rem;">${c.unicode}</td>`; tbody.appendChild(tr); });
+// ═══════════════════════════════════════════
+// REFERENCE TABLE
+// ═══════════════════════════════════════════
+function buildRefTable(){
+  const tb=document.getElementById('ref-tbody');tb.innerHTML='';
+  CONSONANTS.forEach(c=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><span class="deva-big">${c.deva}</span></td><td>${c.iast}</td><td>${c.roman}</td><td>${c.place}</td><td>${c.manner}</td><td style="font-family:monospace;font-size:.85rem;">${c.unicode}</td>`;
+    tb.appendChild(tr);
+  });
 }
 
-document.addEventListener('DOMContentLoaded',()=>{ buildGrids(); buildStrokeSelector(); buildPracticeSelector(); buildHalanta(); buildConjuncts(); buildRefTable(); buildQuiz(); initCanvas(); });
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+document.addEventListener('DOMContentLoaded',()=>{
+  buildGrids();
+  buildStrokeSelector();
+  buildPracticeSelector();
+  buildHalanta();
+  buildConjuncts();
+  buildRefTable();
+  nextQuiz();
+  initCanvas();
+});
 </script>
 </body>
 </html>
