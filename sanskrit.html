@@ -1131,10 +1131,18 @@ function renderSutra(){
 }
 
 function speakFullText(sutraIdx,btn){
-  if(TTS.synth&&TTS.synth.speaking){TTS.stop();btn.classList.remove('speaking');btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';return;}
+  if(!TTS.supported)return;
+  if(TTS.synth.speaking){TTS.stop();btn.classList.remove('speaking');btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';return;}
   const text=SUTRAS[sutraIdx].fullText;if(!text)return;
   btn.classList.add('speaking');btn.innerHTML='<span class="speak-icon">■</span> 停止';
-  TTS.speak(text,null,()=>{btn.classList.remove('speaking');btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';});
+  const utt=new SpeechSynthesisUtterance(text);
+  utt.lang='hi-IN';
+  const v=TTS.synth.getVoices().find(v=>v.lang==='hi-IN')||TTS.synth.getVoices().find(v=>v.lang.startsWith('hi'))||null;
+  if(v)utt.voice=v;
+  utt.rate=0.65;utt.pitch=1.0;
+  utt.onend=utt.onerror=()=>{btn.classList.remove('speaking');btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';};
+  TTS.synth.cancel();
+  TTS.synth.speak(utt);
 }
 function toggleFullText(panelId, btnId){
   const panel=document.getElementById(panelId);
