@@ -299,6 +299,9 @@ main{margin-left:var(--nav-w);flex:1;min-height:100vh;overflow-y:auto;}
 }
 .speak-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
 .speak-btn.speaking{border-color:#508060;color:#80d090;background:#0d1a0d;}
+.ft-chunk{transition:color 0.2s,border-bottom 0.2s;}
+.ft-chunk.ft-current{color:var(--gold-light);border-bottom:2px solid var(--gold);padding-bottom:1px;}
+.ft-chunk.ft-spoken{color:var(--gold-dim);}
 .speak-btn .speak-icon{font-size:0.75rem;}
 .tts-notice{
   font-family:'Space Mono',monospace;font-size:0.58rem;color:var(--cream-dim);
@@ -1103,7 +1106,7 @@ function renderSutra(){
       <div class="gloss-panel" id="${ftPanelId}">
         <div class="gloss-section">
           <div class="gloss-section-label">梵文原典全文</div>
-          <div style="font-family:'Noto Sans Devanagari',sans-serif;font-size:1rem;color:var(--cream);line-height:2.2;white-space:pre-wrap;padding:0.8rem 1rem;border-left:2px solid var(--gold-dim);background:var(--gold-faint);">${s.fullText}</div>
+          <div id="ft-text-${i}" style="font-family:'Noto Sans Devanagari',sans-serif;font-size:1rem;color:var(--cream);line-height:2.2;padding:0.8rem 1rem;border-left:2px solid var(--gold-dim);background:var(--gold-faint);">${s.fullText}</div>
           <div style="margin-top:0.8rem;"><button class="speak-btn" id="ft-spk-${i}" onclick="speakFullText(${i},this)"><span class="speak-icon">▶</span> 朗讀全文</button></div>
         </div>
       </div>`:'';
@@ -1138,13 +1141,26 @@ function speakFullText(sutraIdx,btn){
     if(window._ttsKeepAlive){clearInterval(window._ttsKeepAlive);window._ttsKeepAlive=null;}
     btn.classList.remove('speaking');
     btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';
+    // reset highlights
+    document.querySelectorAll('#ft-text-'+sutraIdx+' .ft-chunk').forEach(s=>s.className='ft-chunk');
     return;
   }
   const raw=SUTRAS[sutraIdx].fullText;
   if(!raw)return;
-  // split into sentence-sized chunks by ।॥ and newlines
-  const chunks=raw.split(/[।॥\n—]+/).map(s=>s.trim()).filter(s=>s.length>2);
+  // build chunks preserving separators
+  const parts=raw.split(/([ ]*[।॥—]+[ ]*|\n+)/);
+  const chunks=[];
+  const seps=[];
+  for(let i=0;i<parts.length;i++){
+    if(i%2===0){if(parts[i].trim().length>1)chunks.push(parts[i].trim());}
+    else seps.push(parts[i]);
+  }
   if(!chunks.length)return;
+  // render spans in the text container
+  const container=document.getElementById('ft-text-'+sutraIdx);
+  if(container){
+    container.innerHTML=chunks.map((c,i)=>`<span class="ft-chunk" id="ft-chunk-${sutraIdx}-${i}">${c}</span> `).join('');
+  }
   btn.classList.add('speaking');
   btn.innerHTML='<span class="speak-icon">■</span> 停止';
   const done=()=>{
@@ -1155,13 +1171,22 @@ function speakFullText(sutraIdx,btn){
   let idx=0;
   function speakNext(){
     if(idx>=chunks.length){done();return;}
+    // update highlight
+    if(idx>0){
+      const prev=document.getElementById('ft-chunk-'+sutraIdx+'-'+(idx-1));
+      if(prev){prev.classList.remove('ft-current');prev.classList.add('ft-spoken');}
+    }
+    const cur=document.getElementById('ft-chunk-'+sutraIdx+'-'+idx);
+    if(cur){
+      cur.classList.add('ft-current');
+      cur.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
     const utt=new SpeechSynthesisUtterance(chunks[idx++]);
     utt.lang='hi-IN';utt.rate=0.72;
-    utt.onend=()=>setTimeout(speakNext,200);
+    utt.onend=()=>setTimeout(speakNext,150);
     utt.onerror=done;
     synth.speak(utt);
   }
-  // Chrome keepalive: resume every 10s to prevent silent pause bug
   window._ttsKeepAlive=setInterval(()=>{if(synth.speaking)synth.resume();},10000);
   setTimeout(speakNext,100);
 }
