@@ -1131,28 +1131,33 @@ function renderSutra(){
 }
 
 function speakFullText(sutraIdx,btn){
-  if(!('speechSynthesis' in window)){alert('您的瀏覽器不支援語音功能');return;}
   const synth=window.speechSynthesis;
-  if(synth.speaking){synth.cancel();btn.classList.remove('speaking');btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';return;}
-  const raw=SUTRAS[sutraIdx].fullText;if(!raw)return;
-  // strip Devanagari punctuation so TTS doesn't stumble
-  const text=raw.replace(/[।॥—]+/g,' ').replace(/\n+/g,' ').trim();
-  const done=()=>{btn.classList.remove('speaking');btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';};
-  btn.classList.add('speaking');btn.innerHTML='<span class="speak-icon">■</span> 停止';
-  function doSpeak(){
-    const voices=synth.getVoices();
-    const utt=new SpeechSynthesisUtterance(text);
-    const v=voices.find(v=>v.lang==='hi-IN')||voices.find(v=>v.lang.startsWith('hi'))||voices.find(v=>v.lang.startsWith('sa'))||voices[0]||null;
-    if(v){utt.voice=v;utt.lang=v.lang;}else{utt.lang='hi-IN';}
-    utt.rate=0.7;utt.pitch=1.0;
-    utt.onend=done;utt.onerror=done;
+  if(!synth){alert('瀏覽器不支援語音');return;}
+  // toggle stop
+  if(synth.speaking||synth.pending){
     synth.cancel();
-    setTimeout(()=>synth.speak(utt),100);
+    btn.classList.remove('speaking');
+    btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';
+    return;
   }
-  // voices may not be loaded yet
-  const voices=synth.getVoices();
-  if(voices.length>0){doSpeak();}
-  else{synth.onvoiceschanged=()=>{synth.onvoiceschanged=null;doSpeak();};}
+  const raw=SUTRAS[sutraIdx].fullText;
+  if(!raw)return;
+  const text=raw.replace(/[।॥—]+/g,' ').replace(/\n+/g,' ').trim();
+  btn.classList.add('speaking');
+  btn.innerHTML='<span class="speak-icon">■</span> 停止';
+  const done=()=>{btn.classList.remove('speaking');btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';};
+  function go(){
+    try{
+      const utt=new SpeechSynthesisUtterance(text);
+      utt.lang='hi-IN';
+      utt.rate=0.7;
+      utt.onend=done;
+      utt.onerror=done;
+      synth.speak(utt);
+    }catch(e){done();console.error(e);}
+  }
+  // Chrome needs a tiny delay after any previous cancel
+  setTimeout(go,150);
 }
 function toggleFullText(panelId, btnId){
   const panel=document.getElementById(panelId);
