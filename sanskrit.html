@@ -1131,18 +1131,28 @@ function renderSutra(){
 }
 
 function speakFullText(sutraIdx,btn){
-  if(!TTS.supported)return;
-  if(TTS.synth.speaking){TTS.stop();btn.classList.remove('speaking');btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';return;}
-  const text=SUTRAS[sutraIdx].fullText;if(!text)return;
+  if(!('speechSynthesis' in window)){alert('您的瀏覽器不支援語音功能');return;}
+  const synth=window.speechSynthesis;
+  if(synth.speaking){synth.cancel();btn.classList.remove('speaking');btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';return;}
+  const raw=SUTRAS[sutraIdx].fullText;if(!raw)return;
+  // strip Devanagari punctuation so TTS doesn't stumble
+  const text=raw.replace(/[।॥—]+/g,' ').replace(/\n+/g,' ').trim();
+  const done=()=>{btn.classList.remove('speaking');btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';};
   btn.classList.add('speaking');btn.innerHTML='<span class="speak-icon">■</span> 停止';
-  const utt=new SpeechSynthesisUtterance(text);
-  utt.lang='hi-IN';
-  const v=TTS.synth.getVoices().find(v=>v.lang==='hi-IN')||TTS.synth.getVoices().find(v=>v.lang.startsWith('hi'))||null;
-  if(v)utt.voice=v;
-  utt.rate=0.65;utt.pitch=1.0;
-  utt.onend=utt.onerror=()=>{btn.classList.remove('speaking');btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';};
-  TTS.synth.cancel();
-  TTS.synth.speak(utt);
+  function doSpeak(){
+    const voices=synth.getVoices();
+    const utt=new SpeechSynthesisUtterance(text);
+    const v=voices.find(v=>v.lang==='hi-IN')||voices.find(v=>v.lang.startsWith('hi'))||voices.find(v=>v.lang.startsWith('sa'))||voices[0]||null;
+    if(v){utt.voice=v;utt.lang=v.lang;}else{utt.lang='hi-IN';}
+    utt.rate=0.7;utt.pitch=1.0;
+    utt.onend=done;utt.onerror=done;
+    synth.cancel();
+    setTimeout(()=>synth.speak(utt),100);
+  }
+  // voices may not be loaded yet
+  const voices=synth.getVoices();
+  if(voices.length>0){doSpeak();}
+  else{synth.onvoiceschanged=()=>{synth.onvoiceschanged=null;doSpeak();};}
 }
 function toggleFullText(panelId, btnId){
   const panel=document.getElementById(panelId);
