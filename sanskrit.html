@@ -1133,31 +1133,37 @@ function renderSutra(){
 function speakFullText(sutraIdx,btn){
   const synth=window.speechSynthesis;
   if(!synth){alert('瀏覽器不支援語音');return;}
-  // toggle stop
   if(synth.speaking||synth.pending){
     synth.cancel();
+    if(window._ttsKeepAlive){clearInterval(window._ttsKeepAlive);window._ttsKeepAlive=null;}
     btn.classList.remove('speaking');
     btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';
     return;
   }
   const raw=SUTRAS[sutraIdx].fullText;
   if(!raw)return;
-  const text=raw.replace(/[।॥—]+/g,' ').replace(/\n+/g,' ').trim();
+  // split into sentence-sized chunks by ।॥ and newlines
+  const chunks=raw.split(/[।॥\n—]+/).map(s=>s.trim()).filter(s=>s.length>2);
+  if(!chunks.length)return;
   btn.classList.add('speaking');
   btn.innerHTML='<span class="speak-icon">■</span> 停止';
-  const done=()=>{btn.classList.remove('speaking');btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';};
-  function go(){
-    try{
-      const utt=new SpeechSynthesisUtterance(text);
-      utt.lang='hi-IN';
-      utt.rate=0.7;
-      utt.onend=done;
-      utt.onerror=done;
-      synth.speak(utt);
-    }catch(e){done();console.error(e);}
+  const done=()=>{
+    if(window._ttsKeepAlive){clearInterval(window._ttsKeepAlive);window._ttsKeepAlive=null;}
+    btn.classList.remove('speaking');
+    btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';
+  };
+  let idx=0;
+  function speakNext(){
+    if(idx>=chunks.length){done();return;}
+    const utt=new SpeechSynthesisUtterance(chunks[idx++]);
+    utt.lang='hi-IN';utt.rate=0.72;
+    utt.onend=()=>setTimeout(speakNext,200);
+    utt.onerror=done;
+    synth.speak(utt);
   }
-  // Chrome needs a tiny delay after any previous cancel
-  setTimeout(go,150);
+  // Chrome keepalive: resume every 10s to prevent silent pause bug
+  window._ttsKeepAlive=setInterval(()=>{if(synth.speaking)synth.resume();},10000);
+  setTimeout(speakNext,100);
 }
 function toggleFullText(panelId, btnId){
   const panel=document.getElementById(panelId);
