@@ -551,6 +551,25 @@ const SUTRAS = [
     desc:'字數最少（梵文原典約 280 字），結構緊湊。幾乎涵蓋所有重要梵文句型，是最佳入門經典。',
     tags:['入門','短篇','空性哲學'],
     difficulty:'⬤ 入門',
+    fullText:`नमः सर्वज्ञाय ।
+
+आर्यावलोकितेश्वरो बोधिसत्त्वो गम्भीरायां प्रज्ञापारमितायां चर्यां चरमाणो व्यवलोकयति स्म । पञ्च स्कन्धाः । तांश्च स्वभावशून्यान् पश्यति स्म ।
+
+इह शारिपुत्र रूपं शून्यता शून्यतैव रूपम् । रूपान्न पृथक् शून्यता शून्यताया न पृथग् रूपम् । यद्रूपं सा शून्यता या शून्यता तद्रूपम् । एवमेव वेदना संज्ञा संस्काराः विज्ञानानि ।
+
+इह शारिपुत्र सर्वधर्माः शून्यतालक्षणा अनुत्पन्ना अनिरुद्धा अमला न विमला नोना न परिपूर्णाः ।
+
+तस्माच्छारिपुत्र शून्यतायां न रूपं न वेदना न संज्ञा न संस्काराः न विज्ञानम् । न चक्षुः श्रोत्र घ्राण जिह्वा काय मनांसि । न रूप शब्द गन्ध रस स्प्रष्टव्य धर्माः । न चक्षुर्धातुः यावन्न मनोविज्ञानधातुः । न विद्या नाविद्या न विद्याक्षयो नाविद्याक्षयः । यावन्न जरामरणं न जरामरणक्षयो न दुःख समुदय निरोध मार्गाः । न ज्ञानं न प्राप्तिः ।
+
+बोधिसत्त्वस्य प्रज्ञापारमितामाश्रित्य विहरत्य् अचित्तावरणः । चित्तावरण नास्तित्वाद् अत्रस्तो विपर्यासातिक्रान्तो निष्ठनिर्वाणः ।
+
+त्र्यध्वव्यवस्थिताः सर्वबुद्धाः प्रज्ञापारमितामाश्रित्य अनुत्तरां सम्यक्सम्बोधिम् अभिसम्बुद्धाः ।
+
+तस्माज्ज्ञातव्यं प्रज्ञापारमिता महामन्त्रो महाविद्यामन्त्रो ऽनुत्तरमन्त्रो ऽसमसममन्त्रः सर्वदुःखप्रशमनः सत्यम् अमिथ्यत्वात् ।
+
+प्रज्ञापारमितायाम् उक्तो मन्त्रः । तद्यथा —
+
+गते गते पारगते पारसंगते बोधि स्वाहा ॥`,
     glossSections:[
       {
         label:'開篇禮讚',
@@ -1077,6 +1096,16 @@ function renderSutra(){
       <span><span style="display:inline-block;width:8px;height:2px;background:#508060;margin-right:3px;vertical-align:middle;"></span>連聲變化</span>
       ${TTS.supported?'<span>🔊 點詞卡發音</span>':''}
     </div>`;
+    const ftPanelId=`ft-panel-${i}`;
+    const ftBtnId=`ft-btn-${i}`;
+    const fullTextBlock=s.fullText?`
+      <button class="sutra-expand-btn" id="${ftBtnId}" style="margin-top:0.6rem;" onclick="toggleFullText('${ftPanelId}','${ftBtnId}')">梵文全文</button>
+      <div class="gloss-panel" id="${ftPanelId}">
+        <div class="gloss-section">
+          <div class="gloss-section-label">梵文原典全文</div>
+          <div style="font-family:'Noto Sans Devanagari',sans-serif;font-size:1rem;color:var(--cream);line-height:2.2;white-space:pre-wrap;padding:0.8rem 1rem;border-left:2px solid var(--gold-dim);background:var(--gold-faint);">${s.fullText}</div>
+        </div>
+      </div>`:'';
     return `<div class="roadmap-item" style="flex-direction:column;display:block;padding:0;">
       <div style="display:grid;grid-template-columns:48px 1fr;">
         <div class="roadmap-num ${isLast?'last':''}">
@@ -1089,7 +1118,8 @@ function renderSutra(){
           <div class="title-en">${s.en}</div>
           <div class="desc">${s.desc}</div>
           <div class="meta">${tags}<span class="tag blue">${s.difficulty}</span></div>
-          ${sectionCount>0?`<button class="sutra-expand-btn" id="${btnId}" onclick="toggleGloss('${panelId}','${btnId}')">
+          ${fullTextBlock}
+          ${sectionCount>0?`<button class="sutra-expand-btn" id="${btnId}" style="margin-top:0.6rem;" onclick="toggleGloss('${panelId}','${btnId}')">
             展開逐字對照（${sectionCount} 段）
           </button>${legend}`:''}
         </div>
@@ -1097,6 +1127,13 @@ function renderSutra(){
       ${sectionCount>0?`<div class="gloss-panel" id="${panelId}">${glossHTML}</div>`:''}
     </div>`;
   }).join('');
+}
+
+function toggleFullText(panelId, btnId){
+  const panel=document.getElementById(panelId);
+  const btn=document.getElementById(btnId);
+  const isOpen=panel.classList.toggle('open');
+  btn.textContent=isOpen?'收起全文':'梵文全文';
 }
 
 function toggleGloss(panelId, btnId){
