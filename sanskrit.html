@@ -1104,6 +1104,7 @@ function renderSutra(){
         <div class="gloss-section">
           <div class="gloss-section-label">梵文原典全文</div>
           <div style="font-family:'Noto Sans Devanagari',sans-serif;font-size:1rem;color:var(--cream);line-height:2.2;white-space:pre-wrap;padding:0.8rem 1rem;border-left:2px solid var(--gold-dim);background:var(--gold-faint);">${s.fullText}</div>
+          <div style="margin-top:0.8rem;"><button class="speak-btn" id="ft-spk-${i}" onclick="speakFullText(${i},this)"><span class="speak-icon">▶</span> 朗讀全文</button></div>
         </div>
       </div>`:'';
     return `<div class="roadmap-item" style="flex-direction:column;display:block;padding:0;">
@@ -1129,6 +1130,12 @@ function renderSutra(){
   }).join('');
 }
 
+function speakFullText(sutraIdx,btn){
+  if(TTS.synth&&TTS.synth.speaking){TTS.stop();btn.classList.remove('speaking');btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';return;}
+  const text=SUTRAS[sutraIdx].fullText;if(!text)return;
+  btn.classList.add('speaking');btn.innerHTML='<span class="speak-icon">■</span> 停止';
+  TTS.speak(text,null,()=>{btn.classList.remove('speaking');btn.innerHTML='<span class="speak-icon">▶</span> 朗讀全文';});
+}
 function toggleFullText(panelId, btnId){
   const panel=document.getElementById(panelId);
   const btn=document.getElementById(btnId);
