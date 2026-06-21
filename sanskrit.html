@@ -6,14 +6,6 @@
 <title>Sanskrit Study — Personal Tool</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* 自帶天城文字型：避免裝置缺字/字型替代造成「內碼≠顯示字形」 */
-@font-face{
-  font-family:'Noto Sans Devanagari';
-  font-style:normal;
-  font-weight:300 700;
-  font-display:swap;
-  src:url('fonts/NotoSansDevanagari-subset.woff2') format('woff2');
-}
 :root {
   --bg: #0f0e0a;
   --surface: #1a1915;
@@ -48,7 +40,7 @@ nav{
   padding:1.8rem 1.4rem 1.2rem;
   border-bottom:1px solid var(--border);
 }
-.nav-logo .deva{font-family:'Noto Sans Devanagari',sans-serif;font-size:1.6rem;color:var(--gold);line-height:1;}
+.nav-logo .deva{font-family:'Nirmala UI','Noto Sans Devanagari',sans-serif;font-size:1.6rem;color:var(--gold);line-height:1;}
 .nav-logo .sub{font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.25em;color:var(--gold-dim);margin-top:0.3rem;}
 .nav-items{padding:1rem 0;flex:1;overflow-y:auto;}
 .nav-item{
@@ -73,7 +65,7 @@ main{margin-left:var(--nav-w);flex:1;min-height:100vh;overflow-y:auto;}
 .page.active{display:block;}
 
 .page-header{margin-bottom:2rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border);}
-.page-header .deva{font-family:'Noto Sans Devanagari',sans-serif;font-size:2rem;color:var(--gold);line-height:1.1;}
+.page-header .deva{font-family:'Nirmala UI','Noto Sans Devanagari',sans-serif;font-size:2rem;color:var(--gold);line-height:1.1;}
 .page-header .en{font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.3em;color:var(--gold-dim);margin-top:0.3rem;}
 .page-header .desc{font-size:0.85rem;color:var(--cream-dim);margin-top:0.6rem;font-style:italic;}
 
@@ -119,7 +111,7 @@ main{margin-left:var(--nav-w);flex:1;min-height:100vh;overflow-y:auto;}
 }
 .letter-card:hover{background:var(--card-hover);}
 .letter-card.open{background:var(--card-hover);outline:1px solid var(--gold-dim);outline-offset:-1px;}
-.letter-card .glyph{font-family:'Noto Sans Devanagari',sans-serif;font-size:2.4rem;line-height:1.1;color:var(--cream);}
+.letter-card .glyph{font-family:'Nirmala UI','Noto Sans Devanagari',sans-serif;font-size:2.4rem;line-height:1.1;color:var(--cream);}
 .letter-card:hover .glyph,.letter-card.open .glyph{color:var(--gold-light);}
 .letter-card .roman{font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--gold);margin-top:0.2rem;}
 .letter-card .zh{font-size:0.65rem;color:var(--cream-dim);margin-top:0.1rem;}
@@ -129,7 +121,7 @@ main{margin-left:var(--nav-w);flex:1;min-height:100vh;overflow-y:auto;}
   padding:1.2rem 1.5rem;margin-top:0;
   display:grid;grid-template-columns:100px 1fr;gap:1rem;
 }
-.letter-detail .big{font-family:'Noto Sans Devanagari',sans-serif;font-size:4.5rem;color:var(--gold-light);line-height:1;text-align:center;}
+.letter-detail .big{font-family:'Nirmala UI','Noto Sans Devanagari',sans-serif;font-size:4.5rem;color:var(--gold-light);line-height:1;text-align:center;}
 .letter-detail .info{display:flex;flex-direction:column;gap:0.5rem;}
 .letter-detail .row{display:flex;gap:1rem;align-items:baseline;flex-wrap:wrap;}
 .letter-detail .lbl{font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--gold-dim);letter-spacing:0.15em;width:52px;flex-shrink:0;}
@@ -149,7 +141,7 @@ main{margin-left:var(--nav-w);flex:1;min-height:100vh;overflow-y:auto;}
 .pron-table td{padding:0.65rem 0.8rem;border-bottom:1px solid var(--border);vertical-align:middle;}
 .pron-table tr:last-child td{border-bottom:none;}
 .pron-table tr:hover td{background:var(--cream-faint);}
-.pron-table .deva-cell{font-family:'Noto Sans Devanagari',sans-serif;font-size:1.4rem;color:var(--gold-light);}
+.pron-table .deva-cell{font-family:'Nirmala UI','Noto Sans Devanagari',sans-serif;font-size:1.4rem;color:var(--gold-light);}
 .pron-table .roman-cell{font-family:'Space Mono',monospace;color:var(--gold);font-size:0.75rem;}
 .pron-table .ipa-cell{font-family:'Space Mono',monospace;color:var(--cream-dim);font-size:0.72rem;}
 .pron-table .zh-cell{color:var(--cream);}
@@ -178,7 +170,7 @@ main{margin-left:var(--nav-w);flex:1;min-height:100vh;overflow-y:auto;}
 .roadmap-num .bar{width:2px;flex:1;background:var(--border);margin-top:0.5rem;}
 .roadmap-num.last .bar{display:none;}
 .roadmap-body{padding:1.2rem 1.5rem;}
-.roadmap-body .title-deva{font-family:'Noto Sans Devanagari',sans-serif;font-size:1.1rem;color:var(--gold-light);}
+.roadmap-body .title-deva{font-family:'Nirmala UI','Noto Sans Devanagari',sans-serif;font-size:1.1rem;color:var(--gold-light);}
 .roadmap-body .title-zh{font-size:1rem;color:var(--cream);margin-top:0.1rem;}
 .roadmap-body .title-en{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--gold-dim);letter-spacing:0.1em;}
 .roadmap-body .desc{font-size:0.82rem;color:var(--cream-dim);margin-top:0.6rem;line-height:1.7;}
@@ -220,7 +212,7 @@ main{margin-left:var(--nav-w);flex:1;min-height:100vh;overflow-y:auto;}
   content:'✓';position:absolute;top:4px;right:6px;
   font-size:0.6rem;color:#508060;
 }
-.progress-cell .pg{font-family:'Noto Sans Devanagari',sans-serif;font-size:1.8rem;color:var(--cream);line-height:1;}
+.progress-cell .pg{font-family:'Nirmala UI','Noto Sans Devanagari',sans-serif;font-size:1.8rem;color:var(--cream);line-height:1;}
 .progress-cell.known .pg{color:#80c090;}
 .progress-cell .pr{font-family:'Space Mono',monospace;font-size:0.55rem;color:var(--gold-dim);}
 .progress-stats{display:flex;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap;}
@@ -261,7 +253,7 @@ main{margin-left:var(--nav-w);flex:1;min-height:100vh;overflow-y:auto;}
 .gloss-section-label::after{content:'';flex:1;height:1px;background:var(--border);}
 
 .gloss-original{
-  font-family:'Noto Sans Devanagari',sans-serif;font-size:1.05rem;
+  font-family:'Nirmala UI','Noto Sans Devanagari',sans-serif;font-size:1.05rem;
   color:var(--cream-dim);line-height:1.9;margin-bottom:1.2rem;
   padding:0.8rem 1rem;border-left:2px solid var(--gold-dim);
   background:var(--gold-faint);
@@ -283,7 +275,7 @@ main{margin-left:var(--nav-w);flex:1;min-height:100vh;overflow-y:auto;}
 }
 .word-card:hover{border-color:var(--gold-dim);background:var(--card-hover);}
 .word-card .wc-deva{
-  font-family:'Noto Sans Devanagari',sans-serif;
+  font-family:'Nirmala UI','Noto Sans Devanagari',sans-serif;
   font-size:1.1rem;color:var(--gold-light);line-height:1.2;text-align:center;
 }
 .word-card .wc-iast{
@@ -350,7 +342,7 @@ main{margin-left:var(--nav-w);flex:1;min-height:100vh;overflow-y:auto;}
   flex:0 0 120px;height:120px;display:grid;place-items:center;
   background:var(--bg);border:1px solid var(--border);
   border-top:2px solid var(--saffron);border-radius:0 0 5px 5px;
-  font-family:'Noto Sans Devanagari',sans-serif;font-size:68px;color:var(--gold-light);line-height:1;
+  font-family:'Nirmala UI','Noto Sans Devanagari',sans-serif;font-size:68px;color:var(--gold-light);line-height:1;
 }
 .varnamala .insp-stroke{
   flex:0 0 120px;height:120px;display:grid;place-items:center;
@@ -365,7 +357,7 @@ main{margin-left:var(--nav-w);flex:1;min-height:100vh;overflow-y:auto;}
 .varnamala .speak-btn{margin-top:1rem;align-self:flex-start;}
 .varnamala .vm-sec{margin-top:2.2rem;}
 .varnamala .sec-head{display:flex;align-items:baseline;gap:0.8rem;margin-bottom:0.3rem;}
-.varnamala .sec-head h2{font-family:'Noto Sans Devanagari',sans-serif;font-weight:600;font-size:1.4rem;color:var(--cream);}
+.varnamala .sec-head h2{font-family:'Nirmala UI','Noto Sans Devanagari',sans-serif;font-weight:600;font-size:1.4rem;color:var(--cream);}
 .varnamala .sec-head .romanized{font-family:'Noto Serif',serif;font-style:italic;color:var(--gold);font-size:0.95rem;}
 .varnamala .sec-note{color:var(--cream-dim);font-size:0.82rem;margin-bottom:1rem;}
 .varnamala .headline-rule{height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-bottom:1.2rem;}
@@ -384,7 +376,7 @@ main{margin-left:var(--nav-w);flex:1;min-height:100vh;overflow-y:auto;}
 .varnamala .card .pen{position:absolute;top:3px;left:5px;font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--saffron);opacity:0.9;}
 .varnamala .card.speaking{animation:vmpulse 0.5s ease;}
 @keyframes vmpulse{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
-.varnamala .card .dg{font-family:'Noto Sans Devanagari',sans-serif;font-size:1.9rem;color:var(--gold-light);line-height:1.2;}
+.varnamala .card .dg{font-family:'Nirmala UI','Noto Sans Devanagari',sans-serif;font-size:1.9rem;color:var(--gold-light);line-height:1.2;}
 .varnamala .card .ro{font-family:'Noto Serif',serif;font-style:italic;font-size:0.85rem;color:var(--cream-dim);margin-top:0.1rem;}
 .varnamala .varga-scroll{overflow-x:auto;}
 .varnamala .varga{display:grid;grid-template-columns:84px repeat(5,minmax(72px,1fr));gap:0.6rem;min-width:560px;}
@@ -413,7 +405,7 @@ main{margin-left:var(--nav-w);flex:1;min-height:100vh;overflow-y:auto;}
   animation:vmReveal 0.22s ease;
 }
 @keyframes vmReveal{from{opacity:0;transform:translateY(-5px);}to{opacity:1;transform:none;}}
-.varnamala .vm-d-glyph{flex:0 0 88px;height:88px;display:grid;place-items:center;background:var(--bg);border:1px solid var(--border);border-top:2px solid var(--saffron);border-radius:0 0 5px 5px;font-family:'Noto Sans Devanagari',sans-serif;font-size:52px;color:var(--gold-light);line-height:1;}
+.varnamala .vm-d-glyph{flex:0 0 88px;height:88px;display:grid;place-items:center;background:var(--bg);border:1px solid var(--border);border-top:2px solid var(--saffron);border-radius:0 0 5px 5px;font-family:'Nirmala UI','Noto Sans Devanagari',sans-serif;font-size:52px;color:var(--gold-light);line-height:1;}
 .varnamala .vm-d-stroke{flex:0 0 88px;height:88px;display:grid;place-items:center;background:#fbf6ea;border:1px solid var(--border);border-top:2px solid var(--gold);border-radius:0 0 5px 5px;overflow:hidden;}
 .varnamala .vm-d-stroke img{max-width:100%;max-height:100%;display:block;}
 .varnamala .vm-d-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:0.3rem;}
@@ -1222,7 +1214,7 @@ function renderSutra(){
       <div class="gloss-panel" id="${ftPanelId}">
         <div class="gloss-section">
           <div class="gloss-section-label">梵文原典全文</div>
-          <div id="ft-text-${i}" style="font-family:'Noto Sans Devanagari',sans-serif;font-size:1rem;color:var(--cream);line-height:2.2;padding:0.8rem 1rem;border-left:2px solid var(--gold-dim);background:var(--gold-faint);">${s.fullText}</div>
+          <div id="ft-text-${i}" style="font-family:'Nirmala UI','Noto Sans Devanagari',sans-serif;font-size:1rem;color:var(--cream);line-height:2.2;padding:0.8rem 1rem;border-left:2px solid var(--gold-dim);background:var(--gold-faint);">${s.fullText}</div>
           <div style="margin-top:0.8rem;"><button class="speak-btn" id="ft-spk-${i}" onclick="speakFullText(${i},this)"><span class="speak-icon">▶</span> 朗讀全文</button></div>
         </div>
       </div>`:'';
