@@ -326,75 +326,6 @@ main{margin-left:var(--nav-w);flex:1;min-height:100vh;overflow-y:auto;}
   .page{padding:1.5rem 1rem 3rem;}
   .letter-detail{grid-template-columns:1fr;}
 }
-
-/* ════════════════════════════════════════════════
-   VARṆAMĀLĀ 字母表模組（含筆順）— 全部樣式 scope 在 .varnamala 之下，
-   不影響其他頁；色系沿用本工具的深金色變數。
-════════════════════════════════════════════════ */
-.varnamala{--saffron:#d98a3d;}
-.varnamala .inspector{
-  display:flex;gap:1.5rem;align-items:stretch;
-  background:var(--surface);border:1px solid var(--border);
-  border-top:2px solid var(--gold);border-radius:0 0 6px 6px;
-  padding:1.4rem;margin:0 0 1.8rem;
-}
-.varnamala .insp-glyph{
-  flex:0 0 120px;height:120px;display:grid;place-items:center;
-  background:var(--bg);border:1px solid var(--border);
-  border-top:2px solid var(--saffron);border-radius:0 0 5px 5px;
-  font-family:'Noto Sans Devanagari',sans-serif;font-size:68px;color:var(--gold-light);line-height:1;
-}
-.varnamala .insp-stroke{
-  flex:0 0 120px;height:120px;display:grid;place-items:center;
-  background:#fbf6ea;border:1px solid var(--border);
-  border-top:2px solid var(--gold);border-radius:0 0 5px 5px;overflow:hidden;
-}
-.varnamala .insp-stroke img{max-width:100%;max-height:100%;display:block;}
-.varnamala .insp-body{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;}
-.varnamala .insp-iast{font-family:'Noto Serif',serif;font-style:italic;font-size:2rem;color:var(--cream);line-height:1;}
-.varnamala .insp-meta{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;color:var(--gold);margin-top:0.7rem;text-transform:uppercase;}
-.varnamala .insp-hint{color:var(--cream-dim);margin-top:0.4rem;font-size:0.9rem;}
-.varnamala .speak-btn{margin-top:1rem;align-self:flex-start;}
-.varnamala .vm-sec{margin-top:2.2rem;}
-.varnamala .sec-head{display:flex;align-items:baseline;gap:0.8rem;margin-bottom:0.3rem;}
-.varnamala .sec-head h2{font-family:'Noto Sans Devanagari',sans-serif;font-weight:600;font-size:1.4rem;color:var(--cream);}
-.varnamala .sec-head .romanized{font-family:'Noto Serif',serif;font-style:italic;color:var(--gold);font-size:0.95rem;}
-.varnamala .sec-note{color:var(--cream-dim);font-size:0.82rem;margin-bottom:1rem;}
-.varnamala .headline-rule{height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-bottom:1.2rem;}
-.varnamala .vgrid{display:grid;grid-template-columns:repeat(8,1fr);gap:0.6rem;}
-.varnamala .card{
-  cursor:pointer;background:var(--card);color:var(--cream);
-  border:1px solid var(--border);border-top:2px solid var(--gold-dim);
-  border-radius:0 0 5px 5px;padding:0.7rem 0.2rem 0.55rem;text-align:center;
-  transition:transform 0.12s,border-color 0.12s,background 0.12s;
-  position:relative;font-family:inherit;
-}
-.varnamala .card:hover{transform:translateY(-3px);background:var(--card-hover);border-top-color:var(--gold-light);}
-.varnamala .card:focus-visible{outline:2px solid var(--saffron);outline-offset:2px;}
-.varnamala .card.sel{border-top-color:var(--saffron);background:var(--card-hover);box-shadow:0 0 0 1px var(--saffron) inset;}
-.varnamala .card.heard::after{content:"";position:absolute;top:6px;right:6px;width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:0.85;}
-.varnamala .card .pen{position:absolute;top:3px;left:5px;font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--saffron);opacity:0.9;}
-.varnamala .card.speaking{animation:vmpulse 0.5s ease;}
-@keyframes vmpulse{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
-.varnamala .card .dg{font-family:'Noto Sans Devanagari',sans-serif;font-size:1.9rem;color:var(--gold-light);line-height:1.2;}
-.varnamala .card .ro{font-family:'Noto Serif',serif;font-style:italic;font-size:0.85rem;color:var(--cream-dim);margin-top:0.1rem;}
-.varnamala .varga-scroll{overflow-x:auto;}
-.varnamala .varga{display:grid;grid-template-columns:84px repeat(5,minmax(72px,1fr));gap:0.6rem;min-width:560px;}
-.varnamala .col-h,.varnamala .row-h{font-family:'Space Mono',monospace;display:flex;flex-direction:column;justify-content:center;}
-.varnamala .col-h{font-size:0.62rem;color:var(--gold);text-align:center;letter-spacing:0.02em;padding-bottom:0.1rem;}
-.varnamala .row-h{font-size:0.8rem;color:var(--cream);font-family:'Noto Serif',serif;}
-.varnamala .row-h small{display:block;font-style:italic;color:var(--cream-dim);font-size:0.72rem;}
-.varnamala .extra-block{margin-top:1.4rem;}
-.varnamala .extra-block .glabel{font-family:'Noto Serif',serif;font-style:italic;color:var(--gold);font-size:0.92rem;margin-bottom:0.6rem;}
-.varnamala .egrid{display:grid;grid-template-columns:repeat(8,1fr);gap:0.6rem;}
-.varnamala .vm-foot{margin-top:1.6rem;font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--saffron);}
-@media(max-width:560px){
-  .varnamala .inspector{flex-direction:column;gap:1rem;}
-  .varnamala .insp-glyph,.varnamala .insp-stroke{flex-basis:auto;width:104px;height:104px;font-size:56px;}
-  .varnamala .vgrid{grid-template-columns:repeat(5,1fr);}
-  .varnamala .egrid{grid-template-columns:repeat(4,1fr);}
-}
-@media(prefers-reduced-motion:reduce){.varnamala .card{transition:none;}.varnamala .card.speaking{animation:none;}}
 </style>
 </head>
 <body>
@@ -435,48 +366,16 @@ main{margin-left:var(--nav-w);flex:1;min-height:100vh;overflow-y:auto;}
   <div class="page-header">
     <div class="deva">वर्णमाला</div>
     <div class="en">Varṇamālā · Alphabet</div>
-    <div class="desc">天城體字母全表 — 點擊任一字發音；左上有 ✎ 的字可在檢視窗看筆順動畫。</div>
+    <div class="desc">天城體字母全表。點擊任一字母展開詳情。</div>
   </div>
 
-  <div class="varnamala">
-    <!-- 檢視窗：顯示目前選中的字 + 筆順 -->
-    <div class="inspector" id="vm-inspector">
-      <div class="insp-glyph" id="vmGlyph">अ</div>
-      <div class="insp-body">
-        <div class="insp-iast" id="vmIast">a</div>
-        <div class="insp-meta" id="vmMeta">母音 svara</div>
-        <div class="insp-hint" id="vmHint"></div>
-        <button class="speak-btn" id="vmSpeak" type="button"><span class="speak-icon">▶</span> 發音</button>
-      </div>
-      <div class="insp-stroke" id="vmStroke" hidden><img id="vmStrokeImg" alt="筆順動畫"></div>
-    </div>
-
-    <!-- 母音 -->
-    <section class="vm-sec">
-      <div class="sec-head"><h2>स्वर</h2><span class="romanized">svara · 母音</span></div>
-      <div class="sec-note">獨立母音。短／長成對（如 a / ā），最後兩個是 anusvāra 鼻化與 visarga 氣音。</div>
-      <div class="headline-rule"></div>
-      <div class="vgrid" id="vmVowelGrid"></div>
-    </section>
-
-    <!-- 子音方陣 -->
-    <section class="vm-sec">
-      <div class="sec-head"><h2>व्यञ्जन</h2><span class="romanized">sparśa · 塞音方陣</span></div>
-      <div class="sec-note">直行＝發音部位（喉 → 唇，由上往下往前推）；橫列＝清濁與送氣的組合，每行最後一格是該部位的鼻音。</div>
-      <div class="headline-rule"></div>
-      <div class="varga-scroll"><div class="varga" id="vmVargaGrid"></div></div>
-    </section>
-
-    <!-- 半母音與擦音 -->
-    <section class="vm-sec">
-      <div class="sec-head"><h2>अन्तःस्थ · ऊष्मन्</h2><span class="romanized">半母音與擦音</span></div>
-      <div class="sec-note">方陣以外的子音：四個半母音，以及噝音與喉擦音 ha。</div>
-      <div class="headline-rule"></div>
-      <div id="vmExtraWrap"></div>
-    </section>
-
-    <div class="vm-foot"><span id="vmVoiceNote"></span></div>
+  <div class="alpha-tabs">
+    <div class="alpha-tab active" data-tab="vowels">母音 Vowels</div>
+    <div class="alpha-tab" data-tab="consonants">輔音 Consonants</div>
   </div>
+
+  <div id="alpha-vowels" class="alpha-section active"></div>
+  <div id="alpha-consonants" class="alpha-section"></div>
 </div>
 
 <!-- ══════════ PAGE: PRONUNCIATION ══════════ -->
@@ -1422,198 +1321,11 @@ document.getElementById('ham').addEventListener('click',()=>{
 /* ════════════════════
    INIT
 ════════════════════ */
+renderAlphabet();
 renderPron();
 renderSutra();
 renderResources();
 renderProgress();
-
-/* ════════════════════════════════════════════════
-   VARṆAMĀLĀ 字母表模組（含筆順動畫）
-   獨立 IIFE，避免與上方 const 命名衝突；發音沿用本工具的 TTS 引擎。
-════════════════════════════════════════════════ */
-(function(){
-  const VM_VOWELS = [
-    {d:'अ', iast:'a',  hint:'短「啊」（輕，如 about 的 a）'},
-    {d:'आ', iast:'ā',  hint:'長「啊」（如 father）'},
-    {d:'इ', iast:'i',  hint:'短「衣」（如 sit）'},
-    {d:'ई', iast:'ī',  hint:'長「衣」（如 see）'},
-    {d:'उ', iast:'u',  hint:'短「烏」（如 put）'},
-    {d:'ऊ', iast:'ū',  hint:'長「烏」（如 food）'},
-    {d:'ऋ', iast:'ṛ',  hint:'母音化的 r，近似「日 / ri」'},
-    {d:'ॠ', iast:'ṝ',  hint:'長母音化的 r（罕用）'},
-    {d:'ऌ', iast:'ḷ',  hint:'母音化的 l（極罕用）'},
-    {d:'ए', iast:'e',  hint:'「ㄟ」（如 they）'},
-    {d:'ऐ', iast:'ai', hint:'「愛」（如 aisle）'},
-    {d:'ओ', iast:'o',  hint:'「歐」（如 go）'},
-    {d:'औ', iast:'au', hint:'「奧」（如 how）'},
-    {d:'अं', iast:'aṃ', hint:'anusvāra — 母音鼻化'},
-    {d:'अः', iast:'aḥ', hint:'visarga — 母音後的氣音'},
-  ];
-  const VM_MANNERS = ['清·不送氣','清·送氣','濁·不送氣','濁·送氣','鼻音'];
-  const VM_VARGA = [
-    {place:'軟顎音', placeEn:'velar',     cells:[['क','ka'],['ख','kha'],['ग','ga'],['घ','gha'],['ङ','ṅa']]},
-    {place:'硬顎音', placeEn:'palatal',   cells:[['च','ca'],['छ','cha'],['ज','ja'],['झ','jha'],['ञ','ña']]},
-    {place:'捲舌音', placeEn:'retroflex', cells:[['ट','ṭa'],['ठ','ṭha'],['ड','ḍa'],['ढ','ḍha'],['ण','ṇa']]},
-    {place:'齒音',   placeEn:'dental',    cells:[['त','ta'],['थ','tha'],['द','da'],['ध','dha'],['न','na']]},
-    {place:'唇音',   placeEn:'labial',    cells:[['प','pa'],['फ','pha'],['ब','ba'],['भ','bha'],['म','ma']]},
-  ];
-  const VM_EXTRA = [
-    {group:'antaḥstha · 半母音', cells:[
-      {d:'य', iast:'ya', hint:'硬顎半母音，如 yes'},
-      {d:'र', iast:'ra', hint:'齒齦顫／閃音，輕彈舌'},
-      {d:'ल', iast:'la', hint:'齒邊音，如 love'},
-      {d:'व', iast:'va', hint:'唇齒近音，介於 v 與 w'},
-    ]},
-    {group:'ūṣman · 擦音', cells:[
-      {d:'श', iast:'śa', hint:'硬顎擦音，如 ship 的 sh'},
-      {d:'ष', iast:'ṣa', hint:'捲舌擦音，舌尖後捲'},
-      {d:'स', iast:'sa', hint:'齒擦音，如 sun'},
-      {d:'ह', iast:'ha', hint:'喉擦音，如 hot'},
-    ]},
-  ];
-
-  /* 筆順動畫對應表  iast → 相對路徑（檔案與 sanskrit.html 同資料夾）。
-     由 Claude Code 依資料夾內實際檔名自動填入；只列「真的有檔案」的字。 */
-  const STROKES = {
-    "a": "Devanagari_a_अ.gif",
-    "ā": "Devanagari_aa_आ.gif",
-    "i": "Devanagari_i_इ.gif",
-    "ī": "Devanagari_ii_ई.gif",
-    "u": "Devanagari_u_उ.gif",
-    "ū": "Devanagari_uu_ऊ.gif",
-    "ṛ": "Devanagari_r_ऋ.gif",
-    "e": "Devanagari_e_ए.gif",
-    "ai": "Devanagari_ɛ_ऐ.gif",
-    "o": "Devanagari_o_ओ.gif",
-    "au": "Devanagari_au_औ.gif",
-    "ka": "Deva-क-order.gif",
-    "kha": "Deva-ख-order.gif",
-    "ga": "Deva-ग-order.gif",
-    "gha": "Deva-घ-order.gif",
-    "ṅa": "Deva-ङ-order.gif",
-    "ca": "Deva-च-order.gif",
-    "cha": "Deva-छ-order.gif",
-    "ja": "Deva-ज-order.gif",
-    "jha": "Deva-झ-order.gif",
-    "ña": "Deva-ञ-order.gif",
-    "ṭa": "Deva-ट-order.gif",
-    "ṭha": "Deva-ठ-order.gif",
-    "ḍa": "Deva-ड-order.gif",
-    "ḍha": "Deva-ढ-order.gif",
-    "ṇa": "Deva-ण-order.gif",
-    "ta": "Deva-त-order.gif",
-    "tha": "Deva-थ-order.gif",
-    "da": "Deva-द-order.gif",
-    "dha": "Deva-ध-order.gif",
-    "na": "Deva-न-order.gif",
-    "pa": "Deva-प-order.gif",
-    "pha": "Devanagari_pʰ_फ.gif",
-    "ba": "Devanagari_b_ब.gif",
-    "bha": "Devanagari_bʰ_भ.gif",
-    "ma": "Devanagari_m_म.gif",
-    "ya": "Deva-य-order.gif",
-    "ra": "Deva-र-order.gif",
-    "la": "Deva-ल-order.gif",
-    "va": "Devanagari_v_व.gif",
-    "śa": "Deva-श-order.gif",
-    "ṣa": "Deva-ष-order.gif",
-    "sa": "Devanagari_s_स.gif",
-    "ha": "Deva-ह-order.gif",
-  };
-
-  // 「已聽過」進度（獨立 key，不干擾其他模組）
-  const VM_STORE='sanskrit-vm-heard';
-  let heard=new Set();
-  try{const raw=localStorage.getItem(VM_STORE); if(raw) heard=new Set(JSON.parse(raw));}catch(e){}
-  function markHeard(d){heard.add(d); try{localStorage.setItem(VM_STORE,JSON.stringify([...heard]));}catch(e){}}
-
-  const $=id=>document.getElementById(id);
-  const iGlyph=$('vmGlyph'),iIast=$('vmIast'),iMeta=$('vmMeta'),iHint=$('vmHint'),
-        strokeBox=$('vmStroke'),strokeImg=$('vmStrokeImg');
-  let current=null;
-
-  function select(obj,cardEl){
-    current=obj;
-    iGlyph.textContent=obj.d; iIast.textContent=obj.iast;
-    iMeta.textContent=obj.meta; iHint.textContent=obj.hint||'';
-    const path=STROKES[obj.iast];
-    if(path){
-      strokeImg.onerror=()=>{strokeBox.hidden=true;};
-      strokeImg.src=path; strokeBox.hidden=false;
-    }else{
-      strokeImg.removeAttribute('src'); strokeBox.hidden=true;
-    }
-    document.querySelectorAll('.varnamala .card.sel').forEach(c=>c.classList.remove('sel'));
-    if(cardEl) cardEl.classList.add('sel');
-  }
-  function play(obj,cardEl){
-    select(obj,cardEl);
-    // 沿用本工具的 TTS（IAST → 近似音，hi-IN 優先）
-    if(typeof TTS!=='undefined' && TTS.supported){
-      TTS.speak(obj.iast, ()=>cardEl&&cardEl.classList.add('speaking'),
-                          ()=>cardEl&&cardEl.classList.remove('speaking'));
-    }
-    markHeard(obj.d);
-    if(cardEl) cardEl.classList.add('heard');
-  }
-  $('vmSpeak').addEventListener('click',()=>{ if(current&&typeof TTS!=='undefined'&&TTS.supported) TTS.speak(current.iast); });
-
-  function makeCard(obj){
-    const b=document.createElement('button');
-    b.className='card'; b.type='button';
-    b.setAttribute('aria-label',`${obj.iast}，${obj.meta}`);
-    if(heard.has(obj.d)) b.classList.add('heard');
-    b.innerHTML=`<div class="dg">${obj.d}</div><div class="ro">${obj.iast}</div>`;
-    if(STROKES[obj.iast]) b.insertAdjacentHTML('afterbegin','<span class="pen" aria-hidden="true">✎</span>');
-    b.addEventListener('click',()=>play(obj,b));
-    return b;
-  }
-
-  // 母音
-  const vowelGrid=$('vmVowelGrid');
-  VM_VOWELS.forEach(v=>{ v.meta='母音 svara'; vowelGrid.appendChild(makeCard(v)); });
-
-  // 子音方陣
-  const vargaGrid=$('vmVargaGrid');
-  vargaGrid.appendChild(Object.assign(document.createElement('div'),{className:'corner'}));
-  VM_MANNERS.forEach(m=>{ const h=document.createElement('div'); h.className='col-h'; h.textContent=m; vargaGrid.appendChild(h); });
-  VM_VARGA.forEach(row=>{
-    const rh=document.createElement('div'); rh.className='row-h';
-    rh.innerHTML=`${row.place}<small>${row.placeEn}</small>`;
-    vargaGrid.appendChild(rh);
-    row.cells.forEach((cell,ci)=>{
-      const obj={d:cell[0],iast:cell[1],meta:`子音 · ${row.place} · ${VM_MANNERS[ci]}`,
-                 hint:`帶固有母音 a 的${row.place}（${row.placeEn}）`};
-      vargaGrid.appendChild(makeCard(obj));
-    });
-  });
-
-  // 半母音與擦音
-  const extraWrap=$('vmExtraWrap');
-  VM_EXTRA.forEach(block=>{
-    const wrap=document.createElement('div'); wrap.className='extra-block';
-    const label=document.createElement('div'); label.className='glabel'; label.textContent=block.group;
-    const grid=document.createElement('div'); grid.className='egrid';
-    block.cells.forEach(c=>{
-      c.meta=block.group.split('·')[1]?block.group.split('·')[1].trim():block.group;
-      grid.appendChild(makeCard(c));
-    });
-    wrap.appendChild(label); wrap.appendChild(grid); extraWrap.appendChild(wrap);
-  });
-
-  // 語音提示
-  function vmVoiceNote(){
-    const note=$('vmVoiceNote');
-    if(!('speechSynthesis' in window)){ note.textContent='（此瀏覽器不支援語音合成。）'; return; }
-    const v=(typeof TTS!=='undefined')?TTS.pickVoice():null;
-    note.textContent=(v&&v.lang&&v.lang.startsWith('hi'))?'發音由瀏覽器內建語音（印地語 hi-IN）提供。':'（未偵測到印地語語音，將以預設語音替代，發音可能不準確。）';
-  }
-  if('speechSynthesis' in window) speechSynthesis.addEventListener('voiceschanged',vmVoiceNote);
-  vmVoiceNote();
-
-  // 預設選中第一個母音
-  select(VM_VOWELS[0],null);
-})();
 </script>
 </body>
 </html>
