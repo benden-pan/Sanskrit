@@ -28,6 +28,9 @@
   .varna-card { background:var(--panel); border:1.5px solid var(--border); border-radius:10px; padding:.7rem .5rem .5rem; text-align:center; cursor:pointer; transition:transform .15s,box-shadow .15s; user-select:none; }
   .varna-card:hover { transform:translateY(-3px); box-shadow:0 4px 12px rgba(139,58,0,.18); }
   .varna-card.selected { border-color:var(--accent2); box-shadow:0 0 0 2px var(--accent2); }
+  .varna-inline-detail { grid-column:1 / -1; animation:varnaReveal .22s ease; }
+  .varna-inline-detail .stroke-panel { margin:.45rem 0 .7rem; }
+  @keyframes varnaReveal { from{opacity:0;transform:translateY(-5px);} to{opacity:1;transform:none;} }
   .varna-deva { font-size:2.2rem; line-height:1; color:var(--accent); }
   .varna-roman { font-size:.8rem; color:var(--muted); margin-top:.2rem; font-style:italic; }
   .varna-iast { font-size:.75rem; color:#a07840; }
@@ -611,22 +614,40 @@ function buildGrids() {
   });
 }
 
+let openVarnaCard = null;
 function selectChar(c, el) {
+  // 移除任何既有的內嵌詳情、清除選取
+  const existing = document.querySelector('.varna-inline-detail');
+  if (existing) existing.remove();
   document.querySelectorAll('.varna-card').forEach(x=>x.classList.remove('selected'));
+  // 舊版置底的固定詳情面板不再使用，保持隱藏
+  const legacy = document.getElementById('char-detail');
+  if (legacy) legacy.style.display = 'none';
+  // 再點同一字 → 收合
+  if (openVarnaCard === el) { openVarnaCard = null; return; }
+
+  openVarnaCard = el;
   el.classList.add('selected');
   const sd = STROKE_DATA[c.deva];
-  const detail = document.getElementById('char-detail');
-  detail.style.display = 'block';
-  document.getElementById('detail-title').textContent = `${c.deva} — ${c.roman} (IAST: ${c.iast})`;
-  document.getElementById('detail-body').innerHTML = `
-    <table style="width:100%;font-size:.9rem;border-collapse:collapse;">
-      <tr><td style="padding:.3rem .6rem;color:var(--muted);width:100px;">發音部位</td><td style="padding:.3rem .6rem;">${c.place}</td></tr>
-      <tr style="background:#fdf0d8"><td style="padding:.3rem .6rem;color:var(--muted);">發音方式</td><td style="padding:.3rem .6rem;">${c.manner}</td></tr>
-      <tr><td style="padding:.3rem .6rem;color:var(--muted);">Unicode</td><td style="padding:.3rem .6rem;font-family:monospace;">${c.unicode}</td></tr>
-      ${sd?`<tr style="background:#fdf0d8"><td style="padding:.3rem .6rem;color:var(--muted);">筆順說明</td><td style="padding:.3rem .6rem;">${sd.note}</td></tr>`:''}
-    </table>
-    ${sd?buildMiniSteps(c.deva,sd):''}`;
-  detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+  const detail = document.createElement('div');
+  detail.className = 'varna-inline-detail';
+  detail.innerHTML = `
+    <div class="stroke-panel">
+      <h4>${c.deva} — ${c.roman} (IAST: ${c.iast})</h4>
+      <table style="width:100%;font-size:.9rem;border-collapse:collapse;">
+        <tr><td style="padding:.3rem .6rem;color:var(--muted);width:100px;">發音部位</td><td style="padding:.3rem .6rem;">${c.place}</td></tr>
+        <tr style="background:#fdf0d8"><td style="padding:.3rem .6rem;color:var(--muted);">發音方式</td><td style="padding:.3rem .6rem;">${c.manner}</td></tr>
+        <tr><td style="padding:.3rem .6rem;color:var(--muted);">Unicode</td><td style="padding:.3rem .6rem;font-family:monospace;">${c.unicode}</td></tr>
+        ${sd?`<tr style="background:#fdf0d8"><td style="padding:.3rem .6rem;color:var(--muted);">筆順說明</td><td style="padding:.3rem .6rem;">${sd.note}</td></tr>`:''}
+      </table>
+      ${sd?buildMiniSteps(c.deva,sd):''}
+    </div>`;
+  // 插在「與被點字同一視覺列」的最後一格之後 → 詳情落在該字正下方
+  const grid = el.parentElement;
+  const top = el.offsetTop;
+  let last = el;
+  [...grid.children].forEach(x=>{ if(!x.classList.contains('varna-inline-detail') && Math.abs(x.offsetTop-top)<4) last = x; });
+  last.after(detail);
 }
 
 function buildMiniSteps(deva, sd) {
