@@ -4,8 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sanskrit Study — Personal Tool</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;600&family=Noto+Serif:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
+/* 自帶天城文字型：避免裝置缺字/字型替代造成「內碼≠顯示字形」 */
+@font-face{
+  font-family:'Noto Sans Devanagari';
+  font-style:normal;
+  font-weight:300 700;
+  font-display:swap;
+  src:url('fonts/NotoSansDevanagari-subset.woff2') format('woff2');
+}
 :root {
   --bg: #0f0e0a;
   --surface: #1a1915;
